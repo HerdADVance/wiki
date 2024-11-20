@@ -4,8 +4,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node server",
-    "dev": "node --watch --env-file=.env server"
+    "start": "node src/server",
+    "dev": "node --watch --env-file=.env src/server"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +13,10 @@
   "description": "",
   "dependencies": {
     "express": "^4.21.1",
-    "pg": "^8.13.1"
+    "pg": "^8.13.1",
+    "sequelize": "^6.37.5"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.2"
   }
 }
