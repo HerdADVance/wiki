@@ -5,13 +5,17 @@
 // 	{id: 3, title: 'Post 33'}
 // ];
 
-import pool from '../config/connection.js';
+const pool = require('../config/connection.js');
 
 // @desc   Show Homepage
 // @route  GET /
-export const showHomepage = async (req, res, next) => {
-	const users = await pool.query('SELECT * FROM users');
-	res.status(200).json(users.rows);
+const showHomepage = async (req, res, next) => {
+    const users = await pool.query('SELECT * FROM users');
+    res.status(200).json(users.rows);
+};
+
+module.exports = {
+    showHomepage
 };
 
 

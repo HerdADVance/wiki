@@ -1,6 +1,5 @@
-import config from './database.js';
-import pkg from 'pg';
-const { Pool } = pkg;
+const config = require('./database.js');
+const { Pool } = require('pg');
 
 // Get correct DB configuration
 const env = process.env.NODE_ENV || 'development';
@@ -15,4 +14,4 @@ const pool = new Pool({
     port: dbConfig.port,
 });
 
-export default pool
+module.exports = pool

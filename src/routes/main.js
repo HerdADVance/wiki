@@ -1,7 +1,6 @@
-import express from 'express';
-import { 
-	showHomepage
-} from '../controllers/mainController.js'
+const express = require('express');
+
+const { showHomepage } = require('../controllers/mainController.js');
 
 // Init Router
 const router = express.Router();
@@ -10,5 +9,4 @@ const router = express.Router();
 router.get('/', showHomepage);
 
 
-// Export with ES Modules (after adding "type": "module" to package.json file)
-export default router;
+module.exports = router;

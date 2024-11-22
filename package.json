@@ -2,7 +2,7 @@
   "name": "wiki",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "start": "node src/server",
     "dev": "node --watch --env-file=.env src/server"

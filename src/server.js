@@ -1,12 +1,12 @@
 
 // Imports
-import express from 'express';
-import path from 'path';
-import errorHandler from './middleware/error.js';
-import logger from './middleware/logger.js';
-import notFound from './middleware/notFound.js';
-import mainRoutes from './routes/main.js';
-import pool from './config/connection.js';
+const express = require('express');
+const path = require('path');
+const errorHandler = require('./middleware/error.js');
+const logger = require('./middleware/logger.js');
+const notFound = require('./middleware/notFound.js');
+const mainRoutes = require('./routes/main.js');
+const pool = require('./config/connection.js');
 
 // Port variable
 const port = process.env.PORT || 8000;
@@ -16,9 +16,6 @@ const app = express();
 
 
 // Static Server setup (only need bottom line if using Common JS)
-import { fileURLToPath } from 'url';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, 'public')));
 
 

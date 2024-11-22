@@ -1,7 +1,7 @@
 // Sequelize setup (NOT USING)
 
-import Sequelize from 'sequelize';
-import config from './database.js';
+const Sequelize = require('sequelize');
+const config = require('./database.js');
 
 const env = process.env.NODE_ENV || 'development';
 const dbConfig = config[env];
@@ -33,4 +33,4 @@ if(process.env.RUN_TEST_CONNECTION === 'true'){
   testConnection();
 }
 
-export default sequelize;
+module.exports = sequelize;
