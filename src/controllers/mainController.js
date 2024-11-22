@@ -5,7 +5,8 @@ const db = require('../config/database.js');
 // @route  GET /
 const showHomepage = async (req, res, next) => {
     const users = await db('users');
-    res.status(200).json(users);
+    //res.status(200).json(users);
+    res.render('index', { title: 'Home Page', message: 'Welcome to my website!' });
 };
 
 module.exports = {

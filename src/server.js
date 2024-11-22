@@ -13,22 +13,12 @@ const port = process.env.PORT || 8000;
 // Create app
 const app = express();
 
+// EJS in views directory
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views')); 
 
-// Static Server setup (only need bottom line if using Common JS)
+// Static Server setup
 app.use(express.static(path.join(__dirname, 'public')));
-
-
-// Database connection
-// async function connectToDatabase() {
-//     try {
-//         await pool.connect();
-//         console.log('Connected to PostgreSQL database');
-//     } catch (err) {
-//         console.error('Connection error', err.stack);
-//     }
-// }
-// await connectToDatabase();
-
 
 // Middleware
 // == Body parser
@@ -49,17 +39,4 @@ app.use(errorHandler);
 
 // Start server
 app.listen(port, () => console.log(`Server running on port ${port}`));
-
-
-// Sync the database w/ Sequelize and start the server (NOT USING)
-// sequelize.sync({ force: false })
-//   .then(() => {
-//     console.log('Database synced successfully');
-//     app.listen(port, () => {
-//       console.log(`Server running on port ${port}`);
-//     });
-//   })
-//   .catch((error) => {
-//     console.error('Error syncing database:', error);
-//   });
 
