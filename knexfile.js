@@ -6,9 +6,23 @@
 module.exports = {
 
   development: {
-    client: 'sqlite3',
+    client: 'postgresql',
     connection: {
-      filename: './dev.sqlite3'
+      database: 'wikiexpress',
+      user:     'alex',
+      password: 'vance',
+      host: 'localhost',
+    },
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      directory: __dirname + '/migrations',
+      tableName: 'knex_migrations'
+    },
+    seeds: {
+      directory: __dirname + '/seeds'
     }
   },
 

@@ -6,7 +6,6 @@ const errorHandler = require('./middleware/error.js');
 const logger = require('./middleware/logger.js');
 const notFound = require('./middleware/notFound.js');
 const mainRoutes = require('./routes/main.js');
-const pool = require('./config/connection.js');
 
 // Port variable
 const port = process.env.PORT || 8000;
