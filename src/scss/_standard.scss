@@ -1,0 +1,196 @@
+@use "standard-vars" as *;
+
+/* Everything gets border box, normal font weight, and no margins/padding/focus outline */
+*{box-sizing: border-box; font-weight: 500; margin: 0; padding: 0}
+*:focus{outline: none;}
+
+/* Top level tags & flexbox layout */
+html{display: flex; font-size: $font-size;}
+body{background: $body-bg; color: $body-color; display: flex; flex-direction:column; min-height: calc(100vh - 1px); width: 100%;}
+main{background: $main-bg; color: $main-color; flex: 1 0 auto; flex-direction: column; flex-grow: 1;}
+
+/* Block display for certain tags */ 
+article, aside, block, details, figcaption, figure, .footer, .header, hgroup, input, label, menu, nav, section, textarea{display: block;}
+
+/* Flex clear and wrap for basic blocks */
+.header, .nav, main, .footer, section{display: flex; flex-direction: column; flex-wrap: wrap;}
+.header, main, .footer{padding-left: $wrap; padding-right: $wrap;}
+
+/* H1 to H6 */
+h1, h2, h3, h4, h5, h6{font-weight: bold;}
+h1{color: $h1-color; font-size: $h1-size; margin-bottom: $h1-mar-bot;}
+h2{color: $h2-color; font-size: $h2-size; margin-bottom: $h2-mar-bot;}
+h3{color: $h3-color; font-size: $h3-size; margin-bottom: $h3-mar-bot;}
+
+/* Links */
+a{color: $link-color; text-decoration: none;}
+a:hover{text-decoration: underline;}
+
+/* Nav */
+.nav{display: block; width: 100%;}
+.nav ul{background: $nav-base-bg; display: flex;}
+.nav li{background: $nav-bg; flex: 1 1 0; text-align: center; transition: $trans;}
+.nav li:hover{background: $nav-bg-hover;}
+.nav li a{background: $nav-link-bg; color: $nav-link-color; display: block; padding: $nav-link-padding;}
+.nav li a:hover{background: $nav-link-bg-hover; color: $nav-link-color-hover; text-decoration: none; width: 100%;}
+
+/* Images */
+img{max-width:100%; vertical-align:bottom}
+
+/* Tables */
+table{border-collapse: collapse; border-spacing: 0; margin: $table-margin; max-width: 100%; width: 100%;}
+th{background: $th-bg; color: $th-color; padding: $th-padding;}
+td{border: $td-border; padding: $td-padding; text-align: center;}
+
+/* Lists and Nav */
+ol, ul {list-style: none; list-style-position: inside;}
+
+/* Paragraphs and Text */
+p{color: $p-color; font-size: $p-size; line-height: $p-line-height; margin-bottom: $p-mar-bot;}
+
+/* Forms & Buttons */
+form{width: 100%;}
+button{background: $button-bg; border: none; box-shadow: $button-shadow; color: $button-color; cursor: pointer; font-size: $button-size; margin-top: $button-mar-top; padding: $button-padding; transition: $button-trans; user-select: none;}
+button[type=submit], input[type=submit]{}
+button:hover{background: $button-hover-bg;}
+input, textarea{background: $input-bg; border: $input-border; display: block; margin-bottom: $input-mar-bot; padding: $input-padding; width: 100%;}
+label{color: $label-color; font-size: $label-size; font-weight: bold; $margin-bottom: $label-mar-bot; text-align: left; width: 100%;}
+input::placeholder{color: #BBB; font-size: 0.875rem;}
+
+/* Scrollbar */
+::-webkit-scrollbar{width: $scroll-width;}
+::-webkit-scrollbar-track{background: $scroll-track-color;}
+::-webkit-scrollbar-thumb{background: $scroll-thumb-color;}
+
+/* Selected text */
+::selection {background: $selected-bg; color: $selected-color;}
+
+
+
+/* ===== UTILITY CLASSES ======
+
+/* Container */
+.con{margin: $con;}
+
+/* Cols and Rows */
+.row{display: flex; flex-wrap: wrap; width: 100%;}
+.row > div{flex: 1 0 0; padding: 0 0.5%;}
+.halves > div{flex-basis: 50%;}
+.thirds > div{flex-basis: 33.3333%;}
+.quarters > div{flex-basis: 25%;}
+.col-1{flex-basis: 8.3333%;}
+.col-2{flex-basis: 16.6666%;}
+.col-3{flex-basis: 25%;}
+.col-4{flex-basis: 33.3333%;}
+.col-5{flex-basis: 41.6666%;}
+.col-6{flex-basis: 50%;}
+.col-7{flex-basis: 58.3333%;}
+.col-8{flex-basis: 66.6666%;}
+.col-9{flex-basis: 75%;}
+.col-10{flex-basis: 83.3333%;}
+.col-11{flex-basis: 91.6666%;}
+.col-12{flex-basis: 100%;}
+
+/* Flex */
+.flex{align-items: center; display: flex; flex-direction: row; justify-content: space-evenly; width: 100%;}
+.flex-center{justify-content: center;}
+.flex-col{flex-direction: column;}
+.flex-row{flex-direction: row;}
+
+/* Floats */
+.float-left{float: left;}
+.float-right{float: right}
+
+/* Wrap */
+.wrap{padding-left: $wrap; padding-right: $wrap;}
+
+/* Width/Height */
+.auto{width: auto;}
+.full{height: 100%; min-height: 100vh;}
+.tall{height: 100%;}
+.wide{width: 100%}
+
+/* Positioning */
+.abs{position: absolute;}
+.rel{position: relative;}
+.sticky{position: sticky; top: 0;}
+.pos-bottom{bottom: 0;}
+.pos-left{left: 0;}
+.pos-right{right: 0;}
+.pos-top{top: 0;}
+
+/* Font Sizes */
+.largest{font-size: 1.5rem !important;}
+.larger{font-size: 1.25rem !important;}
+.large{font-size: 1.125rem !important;}
+.small{font-size: 0.875rem !important;}
+.smaller{font-size: 0.75rem !important;}
+.smallest{font-size: 0.625rem !important;}
+
+/* Text Align & Styles */
+.left{text-align: left;}
+.center{text-align: center;}
+.right{text-align: right;}
+.bold{font-weight: bold;}
+.italic{font-style: italic;}
+
+/* Margin/Padding */
+.no-mar{margin: 0 !important;}
+.no-pad{padding: 0 !important;}
+.no-pad-x{padding-left: 0 !important; padding-right: 0 !important;}
+.no-pad-y{padding-bottom:0 !important; padding-top: 0 !important;}
+
+/* Clickable */
+.point{cursor: pointer; user-select: none;}
+
+/* Box Shadow */
+.shadow{box-shadow: $shadow;}
+
+/* Image backgrounds */
+.img-bg{background-position: 50% 0; background-repeat: no-repeat; background-size: cover;}
+.no-bg{background: none !important;}
+
+/* Modals and Overlays */
+.overlay{align-items: center; background: $overlay-bg; display: none; flex-direction: column; height: 100%; justify-content: center; left: 0; position: fixed; text-align: center; top: 0; z-index: 9; width: 100%;}
+.overlay.open{display: flex;}
+.overlay.error{background: $overlay-error-bg;}
+.overlay > div{}
+.overlay > div.modal{background: $modal-bg; border-radius: $modal-border-radius; height: $modal-height; padding: $modal-padding; width: $modal-width;}
+// .overlay h1{color: #FFF; font-size: 2.5rem; margin-bottom: 0.75rem;}
+// .overlay p{color: #EEE; font-size: 1.25rem;}
+// .overlay .btn{background: #29050f;}
+// .overlay .btn:hover{background: #6a0924;}
+
+/* Cards */
+.card{background: $card-bg; border: $card-border; border-radius: $card-border-radius; box-shadow: $card-shadow; padding: $card-padding;}
+
+/* Tabs */
+.tabs{display: flex;}
+.tabs li{background: $tabs-bg; border: $tabs-border; border-top-left-radius: $tabs-border-radius; border-top-right-radius: $tabs-border-radius; color: $tabs-color; cursor: pointer; padding: $tabs-padding; user-select: none;}
+.tabs li:hover{background: $tabs-bg-hover;}
+.tabs li.active{background: $tabs-bg-active;}
+
+/* Hide or hide on desktop */
+.hide, .mob{display: none;}
+
+
+
+
+// .click-icons img{background: none; border: 1px solid #222; margin-left: 0.5rem; padding: 0.25rem; width: 1.75rem;}
+// .click-icons img.active{background: #fed2ff;}
+
+// /* FONTS */
+// /*@font-face {font-family: 'OpenSans'; src: url('../fonts/OpenSans-Regular.woff2') format('woff2'); font-weight: normal;}
+// @font-face {font-family: 'OpenSans'; src: url('../fonts/OpenSans-Bold.woff2') format('woff2'); font-weight: bold;}
+// */
+
+
+
+
+
+
+
+
+
+
+

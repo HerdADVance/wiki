@@ -1,1 +1,700 @@
-body{background: purple;}
+/* Everything in here is taken from normalize.css with some redundant stuff removed */
+html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+}
+
+hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+}
+
+pre {
+  font-family: monospace, monospace;
+  font-size: 1rem;
+}
+
+a {
+  background-color: transparent;
+}
+
+abbr[title] {
+  border-bottom: none;
+  text-decoration: underline;
+  text-decoration: underline dotted;
+}
+
+code,
+kbd,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1rem;
+}
+
+small {
+  font-size: 80%;
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25rem;
+}
+
+sup {
+  top: -0.5rem;
+}
+
+img {
+  border-style: none;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+button,
+input {
+  overflow: visible;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+[type=button],
+[type=reset],
+[type=submit],
+button {
+  -webkit-appearance: button;
+}
+
+[type=button]::-moz-focus-inner,
+[type=reset]::-moz-focus-inner,
+[type=submit]::-moz-focus-inner,
+button::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+[type=button]:-moz-focusring,
+[type=reset]:-moz-focusring,
+[type=submit]:-moz-focusring,
+button:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+textarea {
+  overflow: auto;
+}
+
+[type=checkbox],
+[type=radio] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+[type=number]::-webkit-inner-spin-button,
+[type=number]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+[type=search] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+
+[type=search]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+
+[hidden] {
+  display: none;
+}
+
+/* Everything gets border box, normal font weight, and no margins/padding/focus outline */
+* {
+  box-sizing: border-box;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+}
+
+*:focus {
+  outline: none;
+}
+
+/* Top level tags & flexbox layout */
+html {
+  display: flex;
+  font-size: 16px;
+}
+
+body {
+  background: antiquewhite;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 1px);
+  width: 100%;
+}
+
+main {
+  background: antiquewhite;
+  color: #333;
+  flex: 1 0 auto;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Block display for certain tags */
+article, aside, block, details, figcaption, figure, .footer, .header, hgroup, input, label, menu, nav, section, textarea {
+  display: block;
+}
+
+/* Flex clear and wrap for basic blocks */
+.header, .nav, main, .footer, section {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.header, main, .footer {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+/* H1 to H6 */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+}
+
+h1 {
+  color: purple;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  color: limegreen;
+  font-size: 1.375rem;
+  margin-bottom: 1.25rem;
+}
+
+h3 {
+  color: cyan;
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+}
+
+/* Links */
+a {
+  color: cyan;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Nav */
+.nav {
+  display: block;
+  width: 100%;
+}
+
+.nav ul {
+  background: none;
+  display: flex;
+}
+
+.nav li {
+  background: none;
+  flex: 1 1 0;
+  text-align: center;
+  transition: background 0.25s ease;
+}
+
+.nav li:hover {
+  background: none;
+}
+
+.nav li a {
+  background: cyan;
+  color: black;
+  display: block;
+  padding: 10px;
+}
+
+.nav li a:hover {
+  background: #009999;
+  color: limegreen;
+  text-decoration: none;
+  width: 100%;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  vertical-align: bottom;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 1rem 0;
+  max-width: 100%;
+  width: 100%;
+}
+
+th {
+  background: blue;
+  color: white;
+  padding: 4px;
+}
+
+td {
+  border: 1px solid #EEE;
+  padding: 5px;
+  text-align: center;
+}
+
+/* Lists and Nav */
+ol, ul {
+  list-style: none;
+  list-style-position: inside;
+}
+
+/* Paragraphs and Text */
+p {
+  color: #333;
+  font-size: 1.25rem;
+  line-height: 1.625rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Forms & Buttons */
+form {
+  width: 100%;
+}
+
+button {
+  background: linear-gradient(to bottom right, #ac2c2c 0%, #6b1039 100%);
+  border: none;
+  box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.5);
+  color: white;
+  cursor: pointer;
+  font-size: 1.25rem;
+  margin-top: 1.5rem;
+  padding: 4px 8px;
+  transition: background 0.25s ease;
+  user-select: none;
+}
+
+button:hover {
+  background: linear-gradient(to bottom right, #ac2c2c 0%, #6b1039 100%);
+}
+
+input, textarea {
+  background: linear-gradient(to bottom, #fffdfd 0%, #fff4f4 100%);
+  border: 1px solid #333;
+  display: block;
+  margin-bottom: 1rem;
+  padding: 0.75rem 0.625rem;
+  width: 100%;
+}
+
+label {
+  color: #333;
+  font-size: 0.875rem;
+  font-weight: bold;
+  text-align: left;
+  width: 100%;
+}
+
+input::placeholder {
+  color: #BBB;
+  font-size: 0.875rem;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #444;
+}
+
+/* Selected text */
+::selection {
+  background: cyan;
+  color: black;
+}
+
+/* ===== UTILITY CLASSES ======
+
+/* Container */
+.con {
+  margin: 1rem;
+}
+
+/* Cols and Rows */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.row > div {
+  flex: 1 0 0;
+  padding: 0 0.5%;
+}
+
+.halves > div {
+  flex-basis: 50%;
+}
+
+.thirds > div {
+  flex-basis: 33.3333%;
+}
+
+.quarters > div {
+  flex-basis: 25%;
+}
+
+.col-1 {
+  flex-basis: 8.3333%;
+}
+
+.col-2 {
+  flex-basis: 16.6666%;
+}
+
+.col-3 {
+  flex-basis: 25%;
+}
+
+.col-4 {
+  flex-basis: 33.3333%;
+}
+
+.col-5 {
+  flex-basis: 41.6666%;
+}
+
+.col-6 {
+  flex-basis: 50%;
+}
+
+.col-7 {
+  flex-basis: 58.3333%;
+}
+
+.col-8 {
+  flex-basis: 66.6666%;
+}
+
+.col-9 {
+  flex-basis: 75%;
+}
+
+.col-10 {
+  flex-basis: 83.3333%;
+}
+
+.col-11 {
+  flex-basis: 91.6666%;
+}
+
+.col-12 {
+  flex-basis: 100%;
+}
+
+/* Flex */
+.flex {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.flex-center {
+  justify-content: center;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+/* Floats */
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+/* Wrap */
+.wrap {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+/* Width/Height */
+.auto {
+  width: auto;
+}
+
+.full {
+  height: 100%;
+  min-height: 100vh;
+}
+
+.tall {
+  height: 100%;
+}
+
+.wide {
+  width: 100%;
+}
+
+/* Positioning */
+.abs {
+  position: absolute;
+}
+
+.rel {
+  position: relative;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+}
+
+.pos-bottom {
+  bottom: 0;
+}
+
+.pos-left {
+  left: 0;
+}
+
+.pos-right {
+  right: 0;
+}
+
+.pos-top {
+  top: 0;
+}
+
+/* Font Sizes */
+.largest {
+  font-size: 1.5rem !important;
+}
+
+.larger {
+  font-size: 1.25rem !important;
+}
+
+.large {
+  font-size: 1.125rem !important;
+}
+
+.small {
+  font-size: 0.875rem !important;
+}
+
+.smaller {
+  font-size: 0.75rem !important;
+}
+
+.smallest {
+  font-size: 0.625rem !important;
+}
+
+/* Text Align & Styles */
+.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
+/* Margin/Padding */
+.no-mar {
+  margin: 0 !important;
+}
+
+.no-pad {
+  padding: 0 !important;
+}
+
+.no-pad-x {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.no-pad-y {
+  padding-bottom: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Clickable */
+.point {
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Box Shadow */
+.shadow {
+  box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Image backgrounds */
+.img-bg {
+  background-position: 50% 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.no-bg {
+  background: none !important;
+}
+
+/* Modals and Overlays */
+.overlay {
+  align-items: center;
+  background: rgba(19, 156, 113, 0.92);
+  display: none;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  text-align: center;
+  top: 0;
+  z-index: 9;
+  width: 100%;
+}
+
+.overlay.open {
+  display: flex;
+}
+
+.overlay.error {
+  background: rgba(244, 4, 39, 0.92);
+}
+
+.overlay > div.modal {
+  background: white;
+  border-radius: 20px;
+  height: 500px;
+  padding: 10px 25px;
+  width: 500px;
+}
+
+/* Cards */
+.card {
+  background: white;
+  border: 1px solid #CCC;
+  border-radius: 20px;
+  box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.5);
+  padding: 10px 25px;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+}
+
+.tabs li {
+  background: red;
+  border: 1px solid #CCC;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  color: white;
+  cursor: pointer;
+  padding: 5px;
+  user-select: none;
+}
+
+.tabs li:hover {
+  background: blue;
+}
+
+.tabs li.active {
+  background: pink;
+}
+
+/* Hide or hide on desktop */
+.hide, .mob {
+  display: none;
+}
+
+header {
+  background: purple;
+}
+
+footer {
+  background: navy;
+  height: 75px;
+}
+
+main {
+  color: black;
+}
+
+#b {
+  height: 300px;
+}
+
+body {
+  background-color: white;
+  color: white;
+}

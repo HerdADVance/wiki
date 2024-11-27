@@ -1,0 +1,17 @@
+@use "normalize";
+@use "standard-vars" as *;
+@use "standard";
+
+
+header{background: $pri;}
+footer{background: navy; height: 75px;}
+main{color: black;}
+#b{height: 300px;}
+
+$background-color: white;
+$text-color: white;
+
+body {
+  background-color: $background-color;
+  color: $text-color;
+}

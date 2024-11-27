@@ -5,7 +5,9 @@
   "type": "commonjs",
   "scripts": {
     "start": "node src/server",
-    "dev": "node --watch --env-file=.env src/server"
+    "dev": "node --watch --env-file=.env src/server",
+    "sass": "sass --watch src/scss/main.scss:src/public/css/style.css --no-source-map",
+    "devsass": "concurrently \"npm run dev\" \"npm run sass\""
   },
   "keywords": [],
   "author": "",
@@ -13,9 +15,11 @@
   "description": "",
   "dependencies": {
     "chokidar": "^3.6.0",
+    "concurrently": "^9.1.0",
     "express": "^4.21.1",
     "knex": "^3.1.0",
     "nunjucks": "^3.2.4",
-    "pg": "^8.13.1"
+    "pg": "^8.13.1",
+    "sass": "^1.81.0"
   }
 }
