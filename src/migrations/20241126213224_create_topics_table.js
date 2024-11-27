@@ -4,9 +4,8 @@
  */
 exports.up = function(knex) {
     return knex.schema.createTable('topics', function(table) {
-        table.increments('id');
+        table.increments('id').primary();
         table.string('title').unique().notNullable();
-        table.text('intro');
         table.timestamps(true, true);
     });
 };
