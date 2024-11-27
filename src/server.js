@@ -2,6 +2,7 @@
 // Imports
 const express = require('express');
 const path = require('path');
+const nunjucks = require('nunjucks');
 const errorHandler = require('./middleware/error.js');
 const logger = require('./middleware/logger.js');
 const notFound = require('./middleware/notFound.js');
@@ -14,8 +15,15 @@ const port = process.env.PORT || 8000;
 const app = express();
 
 // EJS in views directory
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views')); 
+// app.set('view engine', 'ejs');
+// app.set('views', path.join(__dirname, 'views'));
+
+// Nunjucks for views
+nunjucks.configure('views', {
+    autoescape: true,
+    express: app
+});
+app.set('view engine', 'html');
 
 // Static Server setup
 app.use(express.static(path.join(__dirname, 'public')));
