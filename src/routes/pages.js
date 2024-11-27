@@ -1,9 +1,11 @@
 const express = require('express');
-const { showHomepage } = require('../controllers/mainController.js');
 const router = express.Router();
 
-// Get all Posts
+const { getPages, getPage, createPage } = require('../controllers/pagesController.js');
+
+router.get('/', getPages);
 router.get('/:pageId', getPage);
+router.post('/create', createPage);
 
 
 module.exports = router;

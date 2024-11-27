@@ -7,6 +7,7 @@ const errorHandler = require('./middleware/error.js');
 const logger = require('./middleware/logger.js');
 const notFound = require('./middleware/notFound.js');
 const mainRoutes = require('./routes/main.js');
+const pagesRoutes = require('./routes/pages.js');
 
 // Port variable
 const port = process.env.PORT || 8000;
@@ -19,11 +20,13 @@ const app = express();
 // app.set('views', path.join(__dirname, 'views'));
 
 // Nunjucks for views
-nunjucks.configure('views', {
+nunjucks.configure('src/views', {
     autoescape: true,
-    express: app
+    express: app,
+    watch: true,
+    noCache: true,
 });
-app.set('view engine', 'html');
+app.set('view engine', 'njs');
 
 // Static Server setup
 app.use(express.static(path.join(__dirname, 'public')));
@@ -38,6 +41,7 @@ app.use(logger);
 
 // Routes
 app.use('/', logger, mainRoutes);
+app.use('/pages', logger, pagesRoutes);
 
 
 // Error Handler (needs to be below Routes)
