@@ -1,9 +1,10 @@
 @use 'sass:color';
 
 // Colors
-$pri: purple;
-$sec: limegreen;
-$ter: cyan;
+$pri: #222;
+$sec: #222;
+$ter: #222;
+$white: #f5fcfd;
 
 $pri-dark: color.scale($pri, $lightness: -40%);
 $sec-dark: color.scale($sec, $lightness: -40%);
@@ -13,14 +14,14 @@ $sec-light: color.scale($sec, $lightness: 10%);
 $ter-light: color.scale($ter, $lightness: 10%);
 
 // Top Level Backgrounds & Color
-$body-bg: antiquewhite;
+$body-bg: $white;
 $body-color: #333;
-$main-bg: antiquewhite;
+$main-bg: $white;
 $main-color: #333;
 
 // Wrap & Container
 $wrap: 10%;
-$con: 1rem;
+$con: 1rem 0;
 
 // Font Size, Paragraphs and Text
 $font-size: 16px;
@@ -34,10 +35,10 @@ $link-color: cyan;
 $nav-base-bg: none;
 $nav-bg: none;
 $nav-bg-hover: none;
-$nav-link-bg: $ter;
-$nav-link-bg-hover: $ter-dark;
+$nav-link-bg: none;
+$nav-link-bg-hover: none;
 $nav-link-color: black;
-$nav-link-color-hover: $sec;
+$nav-link-color-hover: none;
 $nav-link-padding: 10px;
 
 // H1 to H6

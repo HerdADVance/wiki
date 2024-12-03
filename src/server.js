@@ -7,6 +7,7 @@ const errorHandler = require('./middleware/error.js');
 const logger = require('./middleware/logger.js');
 const notFound = require('./middleware/notFound.js');
 const mainRoutes = require('./routes/main.js');
+const topicsRoutes = require('./routes/topics.js');
 const pagesRoutes = require('./routes/pages.js');
 
 // Port variable
@@ -40,8 +41,9 @@ app.use(logger);
 
 
 // Routes
-app.use('/', logger, mainRoutes);
-app.use('/pages', logger, pagesRoutes);
+app.use('/', mainRoutes);
+app.use('/topics', topicsRoutes);
+app.use('/pages', pagesRoutes);
 
 
 // Error Handler (needs to be below Routes)

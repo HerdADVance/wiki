@@ -3,8 +3,9 @@ const db = require('../config/database.js');
 
 
 const getPages = async (req, res, next) => {
+    const topics = await db('topics');
     const pages = await db('pages');
-    res.render('pages/pages', { pages: pages });
+    res.render('pages/pages', { pages: pages, topics: topics });
 };
 
 const getPage = async (req, res, next) => {
@@ -14,17 +15,33 @@ const getPage = async (req, res, next) => {
 };
 
 const createPage = async (req, res, next) => {
-    try {
-        const ids = await db('pages').insert({
-            title: req.body.title,
-            intro: req.body.intro
-        });
-        console.log(ids);
-        res.redirect('/pages');
 
-    } catch (error) {
-        console.log(error)
-    }
+    // const ids = await db('pages').insert({
+    //     title: req.body.title,
+    //     intro: req.body.intro
+    // });
+    // await db('articles_topics').insert({ article_id: 1, topic_id: 2 });
+    
+    await db.transaction(async (trx) => {
+        try {
+            const newPage = await trx('pages').insert({
+                title: req.body.title,
+                intro: req.body.intro
+            }).returning('id');
+
+            await trx('pages_topics').insert({
+                page_id: newPage[0].id,
+                topic_id: parseInt(req.body.topic)
+            });
+
+        } catch (error) {
+          console.error(error);
+          throw error;
+        }
+    });
+
+    res.redirect('/pages');
+
 };
 
 module.exports = {

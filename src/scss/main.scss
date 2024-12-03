@@ -3,10 +3,12 @@
 @use "standard";
 
 
-header{background: $pri;}
-footer{background: navy; height: 75px;}
+header{background: $white; border-bottom: 1px solid #333;}
+.nav{width: auto;}
 main{color: black;}
-#b{height: 300px;}
+footer{background: navy; height: 75px;}
+
+
 
 $background-color: white;
 $text-color: white;

@@ -1,4 +1,4 @@
-{% extends "index.njs" %}
+{% extends "layout.njs" %}
 
 {% block content %}
 	<h1>{{ page.title }}</h1>

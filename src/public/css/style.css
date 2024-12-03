@@ -151,7 +151,7 @@ html {
 }
 
 body {
-  background: antiquewhite;
+  background: #f5fcfd;
   color: #333;
   display: flex;
   flex-direction: column;
@@ -160,7 +160,7 @@ body {
 }
 
 main {
-  background: antiquewhite;
+  background: #f5fcfd;
   color: #333;
   flex: 1 0 auto;
   flex-direction: column;
@@ -190,19 +190,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  color: purple;
+  color: #222;
   font-size: 2rem;
   margin-bottom: 1.5rem;
 }
 
 h2 {
-  color: limegreen;
+  color: #222;
   font-size: 1.375rem;
   margin-bottom: 1.25rem;
 }
 
 h3 {
-  color: cyan;
+  color: #222;
   font-size: 1.125rem;
   margin-bottom: 1rem;
 }
@@ -240,15 +240,15 @@ a:hover {
 }
 
 .nav li a {
-  background: cyan;
+  background: none;
   color: black;
   display: block;
   padding: 10px;
 }
 
 .nav li a:hover {
-  background: #009999;
-  color: limegreen;
+  background: none;
+  color: none;
   text-decoration: none;
   width: 100%;
 }
@@ -353,7 +353,7 @@ input::placeholder {
 
 /* Selected text */
 ::selection {
-  background: cyan;
+  background: #222;
   color: black;
 }
 
@@ -361,7 +361,7 @@ input::placeholder {
 
 /* Container */
 .con {
-  margin: 1rem;
+  margin: 1rem 0;
 }
 
 /* Cols and Rows */
@@ -455,6 +455,10 @@ input::placeholder {
 
 .flex-row {
   flex-direction: row;
+}
+
+.flex-spread {
+  justify-content: space-between;
 }
 
 /* Floats */
@@ -678,20 +682,21 @@ input::placeholder {
 }
 
 header {
-  background: purple;
+  background: #f5fcfd;
+  border-bottom: 1px solid #333;
 }
 
-footer {
-  background: navy;
-  height: 75px;
+.nav {
+  width: auto;
 }
 
 main {
   color: black;
 }
 
-#b {
-  height: 300px;
+footer {
+  background: navy;
+  height: 75px;
 }
 
 body {
