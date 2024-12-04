@@ -9,8 +9,21 @@ const showHomepage = async (req, res, next) => {
     res.render('index', { title: 'Home Page', message: 'Welcome to my website!' });
 };
 
+const cookieTest = async (req, res, next) => {
+    console.log(req.headers.cookie);
+    console.log(req.cookies);
+    console.log(req.signedCookies.name);
+    res.cookie('name', 'value', { maxAge: 600000, signed: true });
+
+    if(req.signedCookies.name && req.signedCookies.name === 'value')
+        return res.status(201).send({msg: 'cookie matches'});
+
+    return  res.status(201).send({msg: 'NO COOKIE'});
+};
+
 module.exports = {
-    showHomepage
+    showHomepage,
+    cookieTest
 };
 
 

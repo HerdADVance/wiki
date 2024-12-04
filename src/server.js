@@ -3,9 +3,12 @@
 const express = require('express');
 const path = require('path');
 const nunjucks = require('nunjucks');
+const cookieParser = require('cookie-parser');
 const errorHandler = require('./middleware/error.js');
 const logger = require('./middleware/logger.js');
 const notFound = require('./middleware/notFound.js');
+const session = require('express-session');
+const passport = require('passport');
 const mainRoutes = require('./routes/main.js');
 const topicsRoutes = require('./routes/topics.js');
 const pagesRoutes = require('./routes/pages.js');
@@ -33,11 +36,28 @@ app.set('view engine', 'njs');
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Middleware
-// == Body parser
+// -- Cookie parser
+app.use(cookieParser("secretkey"));
+// -- Body parser
 app.use(express.json())
 app.use(express.urlencoded({extended: false}));
-// == Logger
+// -- Logger
 app.use(logger);
+// -- Express Session
+// app.use(session({
+//     secret: 'get a better secret key',
+//     saveUninitialized: false,
+//     resave: false,
+//     cookie: {
+//         maxAge: 60000 * 60 * 24 * 7 // 1 week
+//     }
+//     // store: {
+
+//     // }
+// }));
+// -- Passport
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 
 // Routes
