@@ -1,12 +1,6 @@
 const passport = require('passport');
 const { Strategy } = require('passport-local');
 
-const users = [
-	{ username: 'alex', password: 'vance'},
-	{ username: 'alex2', password: 'vance2'},
-	{ username: 'alex3', password: 'vance3'}
-];
-
 
 passport.serializeUser((user, done) => {
 	done(null, user.id);

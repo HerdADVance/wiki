@@ -9,6 +9,9 @@ const logger = require('./middleware/logger.js');
 const notFound = require('./middleware/notFound.js');
 const session = require('express-session');
 const passport = require('passport');
+
+// Route Imports
+const authRoutes = require('./routes/auth.js');
 const mainRoutes = require('./routes/main.js');
 const topicsRoutes = require('./routes/topics.js');
 const pagesRoutes = require('./routes/pages.js');
@@ -62,6 +65,7 @@ app.use(passport.session());
 
 // Routes
 app.use('/', mainRoutes);
+app.use('/', authRoutes);
 app.use('/topics', topicsRoutes);
 app.use('/pages', pagesRoutes);
 
