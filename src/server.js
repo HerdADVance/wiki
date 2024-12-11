@@ -7,8 +7,9 @@ const cookieParser = require('cookie-parser');
 const errorHandler = require('./middleware/error.js');
 const logger = require('./middleware/logger.js');
 const notFound = require('./middleware/notFound.js');
+const passport = require('./middleware/passport.js');
 const session = require('express-session');
-const passport = require('passport');
+
 
 // Route Imports
 const authRoutes = require('./routes/auth.js');
@@ -16,15 +17,14 @@ const mainRoutes = require('./routes/main.js');
 const topicsRoutes = require('./routes/topics.js');
 const pagesRoutes = require('./routes/pages.js');
 
+// Repo Import
+const UserRepository = require('./repositories/UserRepository.js');
+
 // Port variable
 const port = process.env.PORT || 8000;
 
 // Create app
 const app = express();
-
-// EJS in views directory
-// app.set('view engine', 'ejs');
-// app.set('views', path.join(__dirname, 'views'));
 
 // Nunjucks for views
 nunjucks.configure('src/views', {
@@ -39,14 +39,12 @@ app.set('view engine', 'njs');
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Middleware
-// -- Body parser
 app.use(express.json())
 app.use(express.urlencoded({extended: false}));
-// -- Logger
 app.use(logger);
-// -- Cookie parser
 //app.use(cookieParser("secretkey"));
-// -- Express Session
+
+// Express-Session
 app.use(session({
     secret: 'get a better secret key',
     saveUninitialized: false,
@@ -58,9 +56,11 @@ app.use(session({
 
     // }
 }));
-// -- Passport
+
+// Passport
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 
 // Routes

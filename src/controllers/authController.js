@@ -14,6 +14,11 @@ const register = async (req, res, next) => {
 };
 
 
+const testCallback = async (req, res, next) => {
+	return res.status(401).json({ msg: 'great success'});
+};
+
+
 const loginCheck = async (req, res, next) => {
 
 	// Return validation error(s) message if needed
@@ -69,5 +74,6 @@ module.exports = {
 	login,
 	register,
 	loginCheck,
-	registerCheck
+	registerCheck,
+	testCallback
 }

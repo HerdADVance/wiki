@@ -19,21 +19,19 @@ class UserRepository {
 			if (!foundUser) {
 				return {foundUser: null, error: 'No user with that username was found'};
 			}
-			return {foundUser: foundUser};
+			return {foundUser: foundUser, error: null};
 		} catch{
 			return {foundUser: null, error: 'Error retrieving the user'};
 		}
 	}
 
 	static async findByUsername(username){
-		console.log('username in repo: ')
-		console.log(username)
 		try{
 			const foundUser = await db('users').where({ username }).select('*').first();
 			if (!foundUser) {
 				return {foundUser: null, error: 'No user with that username was found'};
 			}
-			return {foundUser: foundUser};
+			return {foundUser: foundUser, error: null};
 		} catch{
 			return {foundUser: null, error: 'Error retrieving the user'};
 		}

@@ -1,29 +1,25 @@
 const passport = require('passport');
 const { Strategy } = require('passport-local');
-
-
-passport.serializeUser((user, done) => {
-	done(null, user.id);
-});
-
-passport.deserializeUser((id, done) => {
-	try{
-			const foundUser = users.find((user) => user.id === id);
-			if(!foundUser) throw new Error("User not found");
-			done(null, foundUser)
-		} catch(err){
-			done(err, null);
-		}
-});
+const UserRepository = require('../repositories/UserRepository.js');
+const verifyPassword = require('../util/verifyPassword.js');
 
 passport.use(
-	new Strategy({ usernameField: "email" }, (username, password, done) => {
-		const username = 'alex';
-		const password = 'vance';
+	new Strategy({ usernameField: "username" }, (username, password, done) => {
+		console.log('trying passport strat');
 		try{
-			const foundUser = users.find((user) => user.username === username);
-			if(!foundUser) throw new Error("User not found");
-			if(foundUser.password !== password) throw new Error ("invalid credentials");
+			// Find user by username or return error
+			const userQuery = await UserRepository.findById(req.body.username);
+			const foundUser = userQuery.foundUser
+			if(!foundUser){
+				throw new Error(userQuery.error);
+			}
+
+			// Check password
+			const passwordVerified = await verifyPassword(foundUser.password, req.body.password)
+			if(!passwordVerified){
+				throw new Error("Incorrect password");
+			}
+
 			done(null, foundUser)
 		} catch(err){
 			done(err, null);
