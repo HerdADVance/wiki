@@ -13,10 +13,11 @@
   <body class="shadow">
     <header class="header" id="header">
       <div class="flex flex-spread">
-        <h1 class="no-mar">DevPedia</h1>
+        <h1 class="no-mar"><a href="/">DevPedia</a></h1>
         <nav class="nav">
           <ul>
-            <li><a href="/">Home</a></li>
+            <li><a href="/register">Register</a></li>
+            <li><a href="/login">Login</a></li>
             <li><a href="/topics">Topics</a></li>
             <li><a href="/pages">Pages</a></li>
           </ul>

@@ -16,7 +16,7 @@ const router = express.Router();
 
 // Routes
 router.get('/login', login);
-router.post('/login', loginCheck);
+router.post('/login', UserValidator.login(), loginCheck);
 router.get('/register', register);
 router.post('/register', UserValidator.register(), registerCheck);
 
