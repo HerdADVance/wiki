@@ -3,12 +3,11 @@
 const express = require('express');
 const path = require('path');
 const nunjucks = require('nunjucks');
-const cookieParser = require('cookie-parser');
-const errorHandler = require('./middleware/error.js');
 const logger = require('./middleware/logger.js');
+const session = require('./middleware/session.js');
+const globals = require('./middleware/globals.js');
 const notFound = require('./middleware/notFound.js');
-const session = require('express-session');
-
+const errorHandler = require('./middleware/error.js');
 
 // Route Imports
 const authRoutes = require('./routes/auth.js');
@@ -41,41 +40,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json())
 app.use(express.urlencoded({extended: false}));
 app.use(logger);
-//app.use(cookieParser("secretkey"));
-
-// Express-Session
-app.use(session({
-    secret: 'get a better secret key',
-    saveUninitialized: false,
-    resave: false,
-    cookie: {
-        maxAge: 60000 * 60 * 24 * 7 // 1 week
-    }
-    // store: {
-
-    // }
-}));
-
-// Passport
+app.use(session);
 const passport = require('./middleware/passport.js');
 app.use(passport.initialize());
 app.use(passport.session());
-
-// Dynamic globals for Nunjucks
-app.use((req, res, next) => {
-    res.locals.user = req.user;
-    res.locals.currentPath = req.path;
-    next();
-});
-
-// Auth middleware
-function isAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect('/login');
-}
-
+app.use(globals);
 
 
 // Routes
@@ -85,7 +54,7 @@ app.use('/topics', topicsRoutes);
 app.use('/pages', pagesRoutes);
 
 
-// Error Handler (needs to be below Routes)
+// Error Handlers
 app.use(notFound)
 app.use(errorHandler);
 

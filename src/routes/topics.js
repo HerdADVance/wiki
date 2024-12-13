@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { isAuthenticated } = require('../middleware/auth.js');
 
 const { 
 	getTopics, 
@@ -10,7 +11,7 @@ const {
 } = require('../controllers/topicsController.js');
 
 
-router.get('/', getTopics);
+router.get('/', isAuthenticated, getTopics);
 router.get('/:topicId', getTopic);
 router.post('/create', createTopic);
 router.post('/update/:topicId', updateTopic);

@@ -21,7 +21,6 @@ passport.deserializeUser(async (id, done) => {
 });
 
 
-
 // STRATEGIES
 passport.use('local-login', new Strategy(
 	{ 

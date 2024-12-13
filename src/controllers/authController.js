@@ -1,5 +1,7 @@
 const db = require('../config/database.js');
 const { validationResult } = require('express-validator');
+//const passport = require('passport');
+const passport = require('../middleware/passport.js');
 const UserRepository = require('../repositories/UserRepository.js');
 const formatErrors = require('../util/formatErrors.js');
 const hashPassword = require('../util/hashPassword.js');
@@ -32,6 +34,13 @@ const logout = async (req, res, next) => {
 	});
 };
 
+const loginCheck = (req, res, next) => {
+	passport.authenticate('local-login', {
+		successRedirect: '/topics',
+		failureRedirect: '/pages',
+		failureMessage: true
+	})(req, res, next);
+}
 
 
 const registerCheck = async (req, res, next) => {
@@ -62,6 +71,7 @@ const registerCheck = async (req, res, next) => {
 module.exports = {
 	register,
 	login,
+	loginCheck,
 	logout,
 	registerCheck
 }
