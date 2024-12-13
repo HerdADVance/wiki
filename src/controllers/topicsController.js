@@ -4,7 +4,6 @@ const db = require('../config/database.js');
 
 const getTopics = async (req, res, next) => {
     const topics = await db('topics');
-    console.log(req.user);
     res.render('topics/topics', { topics: topics });
 };
 

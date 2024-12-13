@@ -5,10 +5,6 @@ const db = require('../config/database.js');
 const getPages = async (req, res, next) => {
     const pages = await db('pages');
     const topics = await db('topics');
-    const errorMessage = req.session.messages ? req.session.messages[0] : null;
-    req.session.messages = [];
-    console.log(errorMessage);
-    console.log(req.user);
     res.render('pages/pages', { pages: pages, topics: topics });
 };
 

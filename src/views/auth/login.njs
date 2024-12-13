@@ -10,6 +10,8 @@
 		<input name="password" type="password">
 		
 		<button type="submit">Login</button>
+
+		<p>{{ loginError }}</p>
 	</form>
 
 	<script>

@@ -12,7 +12,7 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (id, done) => {
     try{
         const userQuery = await UserRepository.findById(id);
-        const foundUser = userQuery.foundUser;
+        let foundUser = userQuery.foundUser;
         if(!foundUser) throw new Error(userQuery.error);
         done(null, foundUser)
     } catch(err){

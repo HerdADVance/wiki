@@ -8,7 +8,9 @@ const hashPassword = require('../util/hashPassword.js');
 const verifyPassword = require('../util/verifyPassword.js');
 
 const login = async (req, res, next) => {
-	res.render('auth/login');
+	const loginError = req.session.messages ? req.session.messages[0] : null;
+    req.session.messages = [];
+	res.render('auth/login', {loginError: loginError});
 };
 
 const register = async (req, res, next) => {
@@ -37,7 +39,7 @@ const logout = async (req, res, next) => {
 const loginCheck = (req, res, next) => {
 	passport.authenticate('local-login', {
 		successRedirect: '/topics',
-		failureRedirect: '/pages',
+		failureRedirect: '/login',
 		failureMessage: true
 	})(req, res, next);
 }

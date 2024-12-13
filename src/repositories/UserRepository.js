@@ -15,7 +15,7 @@ class UserRepository {
 	
 	static async findById(id){
 		try{
-			const foundUser = await db('users').where({ id }).select('*').first();
+			const foundUser = await db('users').where({ id }).select('id', 'username').first();
 			if (!foundUser) {
 				return {foundUser: null, error: 'No user with that username was found'};
 			}

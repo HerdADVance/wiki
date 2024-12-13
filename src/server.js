@@ -15,9 +15,6 @@ const mainRoutes = require('./routes/main.js');
 const topicsRoutes = require('./routes/topics.js');
 const pagesRoutes = require('./routes/pages.js');
 
-// Repo Import
-const UserRepository = require('./repositories/UserRepository.js');
-
 // Port variable
 const port = process.env.PORT || 8000;
 
