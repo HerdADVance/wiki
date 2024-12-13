@@ -4,10 +4,9 @@ const passport = require('passport');
 // Controller Methods
 const { 
   login,
-  loginCheck,
+  logout,
   register,
   registerCheck,
-  testCallback
 } = require('../controllers/authController.js');
 
 // Validators
@@ -31,9 +30,27 @@ router.post('/register', UserValidator.register(), registerCheck);
 router.post('/login', (req, res, next) => {
   passport.authenticate('local-login', {
     successRedirect: '/topics',
-    failureRedirect: '/pages'
-  })(req, res, next); // Call passport.authenticate with req and res
+    failureRedirect: '/pages',
+    failureMessage: true
+  })(req, res, next);
 });
+
+router.post('/logout', logout);
+
+// (err, user, info) => {
+//   if (err) { 
+//     return next(err); // Handle error
+//   }
+//   if (!user) { 
+//     return res.status(401).json({ msg: info.message }); // Authentication failed
+//   }
+
+//   req.logIn(user, (err) => {
+//     if (err) { 
+//       return next(err); // Handle error during login
+//     }
+//     return res.json({ msg: 'Login successful', user }); // Successful response
+//   });
 
 
 module.exports = router;

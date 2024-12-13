@@ -16,11 +16,18 @@
         <h1 class="no-mar"><a href="/">DevPedia</a></h1>
         <nav class="nav">
           <ul>
-            <li><a href="/register">Register</a></li>
-            <li><a href="/login">Login</a></li>
             <li><a href="/topics">Topics</a></li>
             <li><a href="/pages">Pages</a></li>
           </ul>
+          {% if user %}
+            <p>Welcome, <span>{{ user.username }}</span></p>
+            <form method="POST" action="/logout"><button type="submit">Logout</button></form>
+          {% else %}
+            <ul>
+              <li><a href="/register">Register</a></li>
+              <li><a href="/login">Login</a></li>
+            </ul>
+          {% endif %}
         </nav>
       </div>
     </header>

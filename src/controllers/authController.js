@@ -13,36 +13,25 @@ const register = async (req, res, next) => {
 	res.render('auth/register');
 };
 
+const logout = async (req, res, next) => {
+	req.logout(function(err) {
+		if (err) { return next(err); }
 
-const testCallback = async (req, res, next) => {
-	return res.status(401).json({ msg: 'great success'});
+		// Clear user data from session
+		req.session.user = null;
+		
+		// Regenerate session and redirect to homepage
+		req.session.regenerate(function(err) {
+	  		if (err) { return next(err); }
+	  		
+	  		req.session.save(function(err) {
+	  			if (err) { return next(err); }
+	  			res.redirect('/');
+	  		});
+		});
+	});
 };
 
-
-const loginCheck = async (req, res, next) => {
-
-	// Return validation error(s) message if needed
-	const errors = validationResult(req);
-	if (!errors.isEmpty()) {
-		return res.status(400).json({errors: formatErrors(errors.array())});
-	}
-
-	// Find user by username or return error
-	const userQuery = await UserRepository.findById(req.body.username);
-	const foundUser = userQuery.foundUser
-	if(!foundUser){
-		return res.status(400).json({errors: userQuery.error});
-	}
-
-	// Check password
-	const passwordVerified = await verifyPassword(foundUser.password, req.body.password)
-	if(!passwordVerified){
-		return res.status(400).json({errors: 'Incorrect password'});
-	}
-
-	// Return logged in user
-	return res.status(201).json({foundUser: foundUser});
-};
 
 
 const registerCheck = async (req, res, next) => {
@@ -71,9 +60,8 @@ const registerCheck = async (req, res, next) => {
 
 
 module.exports = {
-	login,
 	register,
-	loginCheck,
-	registerCheck,
-	testCallback
+	login,
+	logout,
+	registerCheck
 }

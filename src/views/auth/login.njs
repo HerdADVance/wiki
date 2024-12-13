@@ -2,7 +2,7 @@
 
 {% block content %}
 	<h1>Login</h1>
-	<form id="login-form">
+	<form action="/login" method="POST" id="login-form">
 		<label>Username</label>
 		<input name="username" type="text">
 		
@@ -13,25 +13,25 @@
 	</form>
 
 	<script>
-		async function submitLoginForm(form){
-			const formData = new FormData(form);
-			const userData = Object.fromEntries(formData.entries());
+		// async function submitLoginForm(form){
+		// 	const formData = new FormData(form);
+		// 	const userData = Object.fromEntries(formData.entries());
 
-			const response = await fetch('/login', {
-		      method: 'POST',
-		      headers: { 'Content-Type': 'application/json' },
-		      body: JSON.stringify(userData)
-		    });
+		// 	const response = await fetch('/login', {
+		//       method: 'POST',
+		//       headers: { 'Content-Type': 'application/json' },
+		//       body: JSON.stringify(userData)
+		//     });
 
-		    const result = await response.json();
-		    console.log(result);
-		}
+		//     const result = await response.json();
+		//     console.log(result);
+		// }
 
-		const form = document.querySelector('#login-form');
-		form.addEventListener('submit', function(event) {
-		  event.preventDefault();
-		  submitLoginForm(form);
-		});
+		// const form = document.querySelector('#login-form');
+		// form.addEventListener('submit', function(event) {
+		//   event.preventDefault();
+		//   submitLoginForm(form);
+		// });
 
 	    
 	</script>

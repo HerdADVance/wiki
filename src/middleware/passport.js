@@ -4,13 +4,14 @@ const UserRepository = require('../repositories/UserRepository.js');
 const verifyPassword = require('../util/verifyPassword.js');
 
 
+// (DE)SERIALIZERS
 passport.serializeUser((user, done) => {
     done(null, user.id);
 });
 
-passport.deserializeUser((id, done) => {
+passport.deserializeUser(async (id, done) => {
     try{
-        const userQuery = UserRepository.findById(id);
+        const userQuery = await UserRepository.findById(id);
         const foundUser = userQuery.foundUser;
         if(!foundUser) throw new Error(userQuery.error);
         done(null, foundUser)
@@ -19,40 +20,32 @@ passport.deserializeUser((id, done) => {
     }
 });
 
+
+
+// STRATEGIES
 passport.use('local-login', new Strategy(
 	{ 
 		usernameField: "username",
 		passReqToCallback: true
 	}, 
 	async (req, username, password, done) => {
-		console.log('trying passport login strat');
-		console.log(username);
-		console.log(password);
 		try{
 			// Find user by username or return error
 			const userQuery = await UserRepository.findByUsername(username);
 			const foundUser = userQuery.foundUser
-			console.log(foundUser);
+
 			if(!foundUser){
-				throw new Error(userQuery.error);
+				return done(null, false, {message: userQuery.error});
 			}
 
 			// Check password
 			const passwordVerified = await verifyPassword(foundUser.password, password)
 			if(!passwordVerified){
-				console.log('incorrect password');
-				throw new Error("Incorrect password");
+				return done(null, false, {message: "Incorrect password"});
 			}
 
-			
-			
-			console.log(req.user);
-			console.log(req.session);
-			console.log('==== ENDING STRAT ==== ');
-			done(null, foundUser)
+			return done(null, foundUser)
 		} catch(err){
-			console.log('### ERROR IN STRAT ###');
-			console.log(err);
 			done(err, null);
 		}
 	})

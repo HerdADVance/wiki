@@ -7,7 +7,6 @@ const cookieParser = require('cookie-parser');
 const errorHandler = require('./middleware/error.js');
 const logger = require('./middleware/logger.js');
 const notFound = require('./middleware/notFound.js');
-const passport = require('./middleware/passport.js');
 const session = require('express-session');
 
 
@@ -58,8 +57,24 @@ app.use(session({
 }));
 
 // Passport
+const passport = require('./middleware/passport.js');
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Dynamic globals for Nunjucks
+app.use((req, res, next) => {
+    res.locals.user = req.user;
+    res.locals.currentPath = req.path;
+    next();
+});
+
+// Auth middleware
+function isAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/login');
+}
 
 
 
