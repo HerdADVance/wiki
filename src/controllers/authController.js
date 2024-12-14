@@ -9,29 +9,24 @@ const verifyPassword = require('../util/verifyPassword.js');
 
 const login = async (req, res, next) => {
 	const loginError = req.session.messages ? req.session.messages[0] : null;
-    req.session.messages = [];
-	res.render('auth/login', {loginError: loginError});
+    //req.session.messages = [];
+	req.session.touch();
+	res.render('auth/login');
 };
 
 const register = async (req, res, next) => {
 	res.render('auth/register');
 };
 
+
 const logout = async (req, res, next) => {
 	req.logout(function(err) {
 		if (err) { return next(err); }
 
-		// Clear user data from session
-		req.session.user = null;
-		
-		// Regenerate session and redirect to homepage
-		req.session.regenerate(function(err) {
-	  		if (err) { return next(err); }
-	  		
-	  		req.session.save(function(err) {
-	  			if (err) { return next(err); }
-	  			res.redirect('/');
-	  		});
+		req.session.destroy(function(err) {
+		  if (err) { return next(err); }
+		  res.clearCookie('connect.sid');
+		  res.redirect('/');
 		});
 	});
 };
