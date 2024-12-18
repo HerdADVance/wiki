@@ -7,6 +7,7 @@ const {
   logout,
   register,
   registerCheck,
+  splash
 } = require('../controllers/authController.js');
 
 // Validators
@@ -23,6 +24,7 @@ router.post('/login', loginCheck);
 router.post('/logout', logout);
 router.post('/register', UserValidator.register(), registerCheck);
 
+router.get('/splash', splash);
 
 module.exports = router;
 

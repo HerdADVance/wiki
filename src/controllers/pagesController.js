@@ -18,7 +18,7 @@ const getPage = async (req, res, next) => {
     page.topic = pageTopics[0]
     const topics = await db('topics');
 
-    res.render('pages/page', { page: page, topics: topics });
+    res.render('pages/page', { page: page, topics: topics, hasEditor: true});
 };
 
 const createPage = async (req, res, next) => {

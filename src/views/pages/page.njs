@@ -1,9 +1,13 @@
 {% extends "layout.njs" %}
 
 {% block content %}
-	<h1>{{ page.title }}</h1>
+	<div id="switchable">
+		<h1 id="page-title">{{ page.title }}</h1>
+		<input type="text" id="page-title-text" style="display:none;">
+		<button id="page-title-text-save" style="display: none;">Save</button>
+	</div>
+	<span>Double click to edit</span>
 	<p>{{ page.intro }}</p>
-	<p>{{ page.topic.id }}</p>
 
 	<h1>Update Page</h1>
 	<form action="/pages/update/{{ page.id }}" method="POST">
@@ -23,4 +27,14 @@
 
 		<button type="submit">Update page</button>
 	</form>
+
+	<script>
+		const element = document.getElementById('switchable');
+		element.addEventListener('dblclick', function() {
+		    $('#page-title').toggle();
+		    $('#page-title-text').toggle();
+		    $('#page-title-text').val($('#page-title').text());
+		    $('#page-title-text-save').toggle();
+		});
+	</script>
 {% endblock %}

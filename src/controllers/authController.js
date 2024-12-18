@@ -8,7 +8,8 @@ const hashPassword = require('../util/hashPassword.js');
 const verifyPassword = require('../util/verifyPassword.js');
 
 const login = async (req, res, next) => {
-	const loginError = req.session.messages ? req.session.messages[0] : null;
+	const messages = req.session.messages || [];
+  	const mostRecentMessage = messages[messages.length - 1];
     //req.session.messages = [];
 	req.session.touch();
 	res.render('auth/login');
@@ -16,6 +17,10 @@ const login = async (req, res, next) => {
 
 const register = async (req, res, next) => {
 	res.render('auth/register');
+};
+
+const splash = async (req, res, next) => {
+	res.render('auth/splash');
 };
 
 
@@ -70,5 +75,6 @@ module.exports = {
 	login,
 	loginCheck,
 	logout,
-	registerCheck
+	registerCheck,
+	splash
 }
