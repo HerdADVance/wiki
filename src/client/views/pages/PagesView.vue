@@ -2,5 +2,5 @@
 </script>
 
 <template>
-	<h1>About</h1>
+	<h1>Pages View</h1>
 </template>

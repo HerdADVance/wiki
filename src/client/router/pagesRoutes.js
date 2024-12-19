@@ -1,8 +1,11 @@
 
-import PageView from '@/views/PageView.vue';
+const loadView = (view) => {
+  return () => import(`@/views/pages/${view}.vue`);
+};
 
 const pagesRoutes = [
-	{path: "/page", name: "page", component: PageView},
+	{path: "/page", name: "page", component: loadView('PageView')},
+	{path: "/pages", name: "pages", component: loadView('PagesView')},
 ];
 
 export default pagesRoutes;
