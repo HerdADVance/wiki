@@ -13,7 +13,7 @@ const {
 const router = express.Router();
 
 // Get all Posts
-router.get('/', showHomepage);
+//router.get('/', showHomepage);
 router.get('/session', sessionTest);
 router.get('/session2', sessionTwoTest);
 router.get('/sessionuser', sessionUserTest);

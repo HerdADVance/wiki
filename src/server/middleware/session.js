@@ -1,6 +1,6 @@
 const session = require('express-session');
 const KnexSessionStore = require('connect-session-knex').ConnectSessionKnexStore;
-const knex = require('knex')(require('../../knexfile').development);
+const knex = require('knex')(require('../../../knexfile').development);
 
 
 const store = new KnexSessionStore({
