@@ -2,7 +2,8 @@
 // Imports
 const express = require('express');
 const path = require('path');
-const nunjucks = require('nunjucks');
+const cors = require('./middleware/cors.js');
+const responseHeaders = require('./middleware/responseHeaders.js');
 const logger = require('./middleware/logger.js');
 const session = require('./middleware/session.js');
 const globals = require('./middleware/globals.js');
@@ -21,21 +22,15 @@ const port = process.env.PORT || 8000;
 // Create app
 const app = express();
 
-// Nunjucks for views
-nunjucks.configure('src/views', {
-    autoescape: true,
-    express: app,
-    watch: true,
-    noCache: true,
-});
-app.set('view engine', 'njs');
 
 // Static Server setup
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Middleware
-app.use(express.json())
+app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+app.use(cors);
+app.use(responseHeaders);
 app.use(logger);
 app.use(session);
 const passport = require('./middleware/passport.js');

@@ -7,6 +7,12 @@ const formatErrors = require('../util/formatErrors.js');
 const hashPassword = require('../util/hashPassword.js');
 const verifyPassword = require('../util/verifyPassword.js');
 
+const loginTest = async (req, res, next) => {
+	console.log('loginTest route from server');
+	console.log(req.body);
+	return res.status(200).json({abc: '123'});
+};
+
 const login = async (req, res, next) => {
 	const messages = req.session.messages || [];
   	const mostRecentMessage = messages[messages.length - 1];
@@ -37,10 +43,20 @@ const logout = async (req, res, next) => {
 };
 
 const loginCheck = (req, res, next) => {
-	passport.authenticate('local-login', {
-		successRedirect: '/topics',
-		failureRedirect: '/login',
-		failureMessage: true
+	console.log('loginCheck route from server');
+	passport.authenticate('local-login', (err, user, info) => {
+		if(err){
+			return next(err);
+		}
+		if(!user){
+			return res.status(401).json({message: 'No user'});
+		}
+		req.logIn(user, (err) => {
+			if(err){
+				return next(err);
+			}
+			return res.status(200).json({message: 'Auth successful', user});
+		});
 	})(req, res, next);
 }
 
@@ -74,6 +90,7 @@ module.exports = {
 	register,
 	login,
 	loginCheck,
+	loginTest,
 	logout,
 	registerCheck,
 	splash

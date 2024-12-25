@@ -4,6 +4,7 @@ const express = require('express');
 const { 
   login,
   loginCheck,
+  loginTest,
   logout,
   register,
   registerCheck,
@@ -20,6 +21,7 @@ const router = express.Router();
 router.get('/login', login);
 router.get('/register', register);
 
+router.post('/logintest', loginTest);
 router.post('/login', loginCheck);
 router.post('/logout', logout);
 router.post('/register', UserValidator.register(), registerCheck);
