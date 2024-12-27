@@ -1,30 +1,53 @@
 <script setup>
+	import { ref } from 'vue';
 	import axios from 'axios';
 	axios.defaults.withCredentials = true;
-	    
-	const login = async () => {
-	  console.log('sending login to axios');
-      try {
-        const response = await axios.post('http://localhost:8000/login', {
-          username: 'jjjjj',
-          password: 'alexvance',
-        });
-        console.log(response.data);
-      } catch (error) {
-        console.error(error.response.data);
-      }
+	import { loginValidator, registrationValidator } from '@/validators/authValidators.js'
+	import loginForm from '@/forms/loginForm.js'
+	import Form from '@/components/Form.vue';
+	
+
+	const login = ref(loginForm);
+
+
+	const loginRequest = async () => {
+
+	  const field = login.value.fields.find(field => field.name === 'Username');
+	  field.value = 'Yooosername'
+
+
+	  //const formData = new FormData(loginForm.value);
+	  //const validatedData = loginValidator(formData, loginFormInfo.value.fields);
+
+     
+      //console.log(validatedLogin);
+      
+      // try {
+      //   const response = await axios.post('http://localhost:8000/login', {
+      //     username: 'jjjjj',
+      //     password: 'alexvance',
+      //   });
+      //   console.log(response.data);
+      // } catch (error) {
+      //   console.error(error.response.data);
+      // }
     };
 
+    const regForm = ref(null);
 	const register = async () => {
-      try {
-        const response = await axios.post('/api/login', {
-          username: this.username,
-          password: this.password,
-        });
-        console.log(response.data.message);
-      } catch (error) {
-        console.error(error.response.data.message);
-      }
+
+	  const validated = registrationValidator(data);
+      console.log(validated);
+
+      // try {
+      //   const response = await axios.post('/api/login', {
+      //     username: this.username,
+      //     password: this.password,
+      //   });
+      //   console.log(response.data.message);
+      // } catch (error) {
+      //   console.error(error.response.data.message);
+      // }
     };
 
 </script>
@@ -33,20 +56,13 @@
 	<div class="tall wide flex flex-col">
 		
 		<h1>Login</h1>
-		<form @submit.prevent="login" id="login-form">
-			<label>Usernameeee</label>
-			<input name="username" type="text">
-			
-			<label>Passwordddd</label>
-			<input name="password" type="password">
-			
-			<button type="submit">Login</button>
 
-			<p>loginError</p>
+		<form @submit.prevent="loginRequest">
+			<Form :form="login" />
 		</form>
 
 		<h1>Register</h1>
-		<form @submit.prevent="register" id="reg-form">
+		<form ref="regForm" @submit.prevent="register">
 			<label>Email</label>
 			<input name="email" type="text">
 			
@@ -64,49 +80,4 @@
 
 	</div>
 
-	<!--script>
-		// async function submitLoginForm(form){
-		// 	const formData = new FormData(form);
-		// 	const userData = Object.fromEntries(formData.entries());
-
-		// 	const response = await fetch('/login', {
-		//       method: 'POST',
-		//       headers: { 'Content-Type': 'application/json' },
-		//       body: JSON.stringify(userData)
-		//     });
-
-		//     const result = await response.json();
-		//     console.log(result);
-		// }
-
-		// const form = document.querySelector('#login-form');
-		// form.addEventListener('submit', function(event) {
-		//   event.preventDefault();
-		//   submitLoginForm(form);
-		// });
-
-		// =====================
-
-		// async function submitRegistrationForm(form){
-		// 	const formData = new FormData(form);
-		// 	const userData = Object.fromEntries(formData.entries());
-
-		// 	const response = await fetch('/register', {
-		//       method: 'POST',
-		//       headers: { 'Content-Type': 'application/json' },
-		//       body: JSON.stringify(userData)
-		//     });
-
-		//     const errorData = await response.json();
-		//     console.log(errorData.details);
-		// }
-
-		// const form = document.querySelector('#reg-form');
-		// form.addEventListener('submit', function(event) {
-		//   event.preventDefault();
-		//   submitRegistrationForm(form);
-		// });
-
-	    
-	</script-->
 </template>

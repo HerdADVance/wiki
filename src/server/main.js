@@ -6,6 +6,7 @@ const cors = require('./middleware/cors.js');
 const responseHeaders = require('./middleware/responseHeaders.js');
 const logger = require('./middleware/logger.js');
 const session = require('./middleware/session.js');
+const passport = require('./middleware/passport.js');
 const globals = require('./middleware/globals.js');
 const notFound = require('./middleware/notFound.js');
 const errorHandler = require('./middleware/error.js');
@@ -22,9 +23,9 @@ const port = process.env.PORT || 8000;
 // Create app
 const app = express();
 
-
 // Static Server setup
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 // Middleware
 app.use(express.json());
@@ -33,7 +34,6 @@ app.use(cors);
 app.use(responseHeaders);
 app.use(logger);
 app.use(session);
-const passport = require('./middleware/passport.js');
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(globals);
