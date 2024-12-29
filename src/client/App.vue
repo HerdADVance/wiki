@@ -1,6 +1,5 @@
 <script setup>
   
-  import axios from 'axios';
   import { RouterView, useRoute, useRouter } from 'vue-router';
   import { computed, onMounted, ref, reactive, watch } from 'vue';
   import { useHead } from '@unhead/vue'

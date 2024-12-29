@@ -1,38 +1,67 @@
 
-export const baseValidator = (formData, fields) => {
-	const data = gatherFormData(formData);
-	console.log(fields);
-	const fieldsList = fields.map(obj => obj.name);
-	console.log(fieldsList);
-	if(!isObj(data) || !hasCorrectFields(data, fieldsList)){
-		return {data: null, error: 'Invalid input'}
-	}
-	return {data, error: null};
-}
+// Doesn't modify the actual form in any way
+export const baseValidator = (fields) => {
+	let errors = []
+	fields.forEach((field) => {
+		let fieldErrors = []
+		field.validators.forEach((validator) => {
+			const [[validatorKey, validatorValue]] = Object.entries(validator);
+			const validatorFunction = getValidatorFunctionByKey(validatorKey);
+			const fieldError = validatorFunction(validatorValue, field.value);
+			if(fieldError) fieldErrors.push(fieldError)
+		});
 
-
-// Util functions
-function gatherFormData(formData){
-	const data = {};
-	formData.forEach((value, key) => {
-	    data[key] = value;
+		if(fieldErrors.length > 0) errors.push({field: field.name, errors: fieldErrors});
 	});
-	return data;
+	return errors.length > 0 ? errors : null;
 }
 
 
-function isObj(obj){
-	if (typeof obj !== 'object' || obj === null) {
-    	return false;
-  	}
-  	return true;
-};
 
+// Map that finds correct validator function below
+const getValidatorFunctionByKey = (key) => {
+	const validatorMap = {
+		email: emailValidator,
+		maxLength: maxLengthValidator,
+		minLength: minLengthValidator,
+		required: requiredValidator,
+	}
+	return validatorMap[key];
+}
 
-function hasCorrectFields(obj, expectedFields){
-	const objKeys = Object.keys(obj);
-  	return objKeys.length === expectedFields.length && expectedFields.every(key => objKeys.includes(key));
-};
+// Commonly used validator functions
+const emailValidator = (required, value) => {
+	const errorMessage = "This field must be a valid email address";
+	if (!required) return null;
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if(!emailPattern.test(value)) return errorMessage;
+  return null;
+}
 
+const maxLengthValidator = (maxLength, value) => {
+	const errorMessage = "This field must be no more than " + maxLength + " characters."
+	if(value.length > maxLength) return errorMessage;
+	return null;
+}
+
+const minLengthValidator = (minLength, value) => {
+	const errorMessage = "This field must be at least " + minLength + " characters."
+	if(value.length < minLength) return errorMessage;
+	return null;
+}
+
+const requiredValidator = (required, value) => {
+	const errorMessage = "This field is required";
+	if (!required) return null;
+	if(
+		value === null ||
+    value === undefined ||
+    value === '' ||
+    (Array.isArray(value) && value.length === 0) ||
+    (typeof value === 'object' && Object.keys(value).length === 0)
+  ) return errorMessage;
+
+	return null;
+}
 
 

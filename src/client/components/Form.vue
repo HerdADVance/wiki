@@ -10,7 +10,7 @@
 <template>
 
 	<template v-for="field in form.fields">
-		<label>{{ field.name }}</label>
+		<label>{{ field.display }}</label>
 		<input 
 			v-model="field.value"
 			:name="field.name"

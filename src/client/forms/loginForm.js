@@ -1,32 +1,33 @@
 
-const loginForm = {
+import { addBaseProperties } from './util.js';
+
+let loginForm = {
 	submitText: 'Login',
 	fields: [
 		{
-			name: 'Username',
-			required: true,
-			minLength: 5,
-			maxLength: 25,
-			value: 'muh username'
+			display: 'Username',
+			value: 'jjjjj',
+			validators: [
+				{email: false},
+				{required: true},
+				{minLength: 5},
+				{maxLength: 25}
+			]
 		},
 		{	
-			name: 'Password',
+			display: 'Password',
 			type: 'password',
-			required: true,
-			minLength: 5,
-			maxLength: 25,
-			value: 'muh password'
+			value: 'alexvance',
+			validators: [
+				{required: true},
+				{minLength: 5},
+				{maxLength: 25}
+			]
 		},
 	]
 };
 
-addNullProperties();
+loginForm = addBaseProperties(loginForm);
 
-function addNullProperties() {
-	loginForm.fields.forEach((field) => {
-		field.error = null;
-		if(!field.value) field.value = null;
-	});
-}
 
 export default loginForm;
