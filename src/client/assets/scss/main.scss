@@ -3,9 +3,10 @@
 @use "standard";
 
 
+body{background: yellow !important;}
 header{background: $white; border-bottom: 1px solid #333;}
 .nav{width: auto;}
-main{color: black;}
+main{color: blue;}
 footer{background: navy; height: 75px;}
 
 
