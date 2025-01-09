@@ -4,7 +4,8 @@ const { isAuthenticated } = require('../middleware/auth.js');
 
 const { 
 	getTopics, 
-	getTopic, 
+	getTopic,
+	searchTopics,
 	createTopic,
 	updateTopic,
 	deleteTopic
@@ -13,6 +14,7 @@ const {
 
 router.get('/', isAuthenticated, getTopics);
 router.get('/:topicId', getTopic);
+router.post('/search', searchTopics);
 router.post('/create', createTopic);
 router.post('/update/:topicId', updateTopic);
 router.post('/delete/:topicId', deleteTopic);

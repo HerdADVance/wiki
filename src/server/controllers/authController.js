@@ -75,7 +75,7 @@ const registerCheck = async (req, res, next) => {
 
 	// Add new user to database or return error message
 	try {
-	    const newUser = await UserRepository.create(req.body);
+		const newUser = await UserRepository.create(req.body);
 	} catch (error) {
 		return res.status(400).json({details: "There was a problem attempting to create a new user"});
 	}

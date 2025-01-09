@@ -1,1 +1,6 @@
+Prevent double clicks of post requests
+
 Home screen space dedicated to most viewed pages sorted by topics
+
+Create/edit options on 2nd header bar for admins, can be toggled
+Sections dividing different things. 

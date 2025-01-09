@@ -64,6 +64,7 @@ const passportTest = async (req, res, next) => {
 
 
 const cookieTest = async (req, res, next) => {
+
     console.log(req.headers.cookie);
     console.log(req.cookies);
     console.log(req.signedCookies.name);
@@ -72,7 +73,7 @@ const cookieTest = async (req, res, next) => {
     if(req.signedCookies.name && req.signedCookies.name === 'value')
         return res.status(201).send({msg: 'cookie matches'});
 
-    return  res.status(201).send({msg: 'NO COOKIE'});
+    return res.status(201).send({msg: 'NO COOKIE'});
 };
 
 module.exports = {

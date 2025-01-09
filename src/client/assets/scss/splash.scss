@@ -1,0 +1,44 @@
+@use "standard-vars" as *;
+
+// VARIABLES
+
+// IMAGE HALF
+.splash-image{
+  background-image:url(../img/encyclopedias.jpg); 
+  background-position: 50% 25%;
+}
+.splash-image .overlay{
+  background: rgba($pri, 0.92);
+}
+.splash-image p{
+  color: $white;
+  font-size: 2.5rem;
+  line-height: 3rem;
+  padding: 0 16.6666%;
+}
+
+
+// AUTHENTICAION HALF
+.splash-auth{background: linear-gradient(to right, #000 0%, #333 1%, floralwhite 3%, $white 100%);}
+.splash-auth > div{padding: 1rem 16.6666%;}
+.splash-auth img{margin-bottom: 2rem;}
+
+.form-auth input[type=text], .form-auth input[type=password], .form-auth input::placeholder, header input{
+  background-position: 8px 50%;
+  background-repeat: no-repeat;
+  background-size: auto 33.3333%;
+  font-size: 1.25rem;
+  text-indent: 24px;
+}
+input[name=email]{background-image:url(../img/mail.svg);}
+input[name=username]{background-image:url(../img/user.svg);}
+input[type=password]{background-image:url(../img/lock.svg);}
+input[type=submit]{
+  background: linear-gradient(to bottom right, $sec 0%, $sec-dark 100%);
+  background-size: auto; 
+  color: white;
+  cursor: pointer;
+  font-size: 1.375rem;
+  margin: 1.75rem 0 1rem;
+}
+input[type=submit]:hover{background: linear-gradient(to bottom right, $sec-light 0%, $sec 100%);}

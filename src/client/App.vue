@@ -3,6 +3,7 @@
   import { RouterView, useRoute, useRouter } from 'vue-router';
   import { computed, onMounted, ref, reactive, watch } from 'vue';
   import { useHead } from '@unhead/vue'
+
   import MainLayout from '@/layouts/MainLayout.vue';
   import SplashLayout from '@/layouts/SplashLayout.vue';
 
@@ -24,6 +25,8 @@
     }
   })
 
+  
+
   onMounted(async () => {
     
     router.beforeEach((to, from, next) => {
@@ -33,7 +36,9 @@
       } else{
         next();
       }
-    })
+    });
+
+
 
     // try {
     //   const response = await axios.post('http://localhost:8000/logintest', {
@@ -70,16 +75,13 @@
   //   console.log('mount up');
   // });
 
+  
   useHead({
-    title: 'Weeeeeee',
-    //link: [{ href: 'https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css', rel: 'stylesheet' }],
-    //script: [{ src: 'https://code.jquery.com/jquery-3.5.1.min.js' }],
-    //script: [{ src: 'https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js' }],
-    //link: [{ href: 'https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.css', rel: 'stylesheet' }],
-    //script: [{ src: 'https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.js' }]
+    //title: 'Weeeeeee'
+    //link: [{ href: '/assets/vendor/suneditor.css', rel: 'stylesheet' }],
+    //script: [{ src: '/assets/vendor/suneditor.js' }]
   });
-
-  const count = ref(0);
+  const count = ref(1);
 
 </script>
 

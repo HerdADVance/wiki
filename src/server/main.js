@@ -41,9 +41,9 @@ app.use(globals);
 
 // Routes
 app.use('/', mainRoutes);
-app.use('/', authRoutes);
-app.use('/topics', topicsRoutes);
-app.use('/pages', pagesRoutes);
+app.use('/api', authRoutes);
+app.use('/api/topics', topicsRoutes);
+app.use('/api/pages', pagesRoutes);
 
 
 // Error Handlers

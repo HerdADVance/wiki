@@ -4,8 +4,9 @@ const loadView = (view) => {
 };
 
 const pagesRoutes = [
-	{path: "/page", name: "page", component: loadView('PageView')},
-	{path: "/pages", name: "pages", component: loadView('PagesView'), meta: {requiresAuth: true} },
+	{path: "/page/:id", name: "Page", component: loadView('PageView')},
+	{path: "/pages", name: "Pages", component: loadView('PagesView'), meta: {requiresAuth: true} },
+	{path: "/page/create", name: "PageCreate", component: loadView('PageCreateView') },
 ];
 
 export default pagesRoutes;

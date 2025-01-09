@@ -1,0 +1,74 @@
+@use "standard-vars" as *;
+
+// Local Variables
+$header-height: 3.5rem;
+$header-wrap: 3%;
+$header-child-height: $header-height * 0.8;
+
+
+// Header 
+header{
+  background: floralwhite; 
+  border-bottom: 1px solid #333; 
+  box-shadow: 1px 3px 3px $pri-light; 
+  height: $header-height; 
+  padding: 0 $header-wrap;
+  z-index: 99;
+}
+
+// Logo
+header img{height: $header-child-height;}
+
+// Search Input
+header input{
+  background-image:url(../img/search.svg);
+  color: #CCC;
+  font-size: 1.25rem;
+  height: $header-child-height * 0.8;
+  padding: 0 0.75rem;
+}
+
+// User Info Toggle Button
+#user-info-toggle{
+  background-color: $sec;
+  border: 1px solid $pri-light;
+  color: $pri-dark;
+  font-size: $header-child-height * 0.75;
+  height: $header-child-height;
+  line-height: calc($header-child-height - 1px);
+  width: $header-child-height;
+}
+#user-info-toggle:hover{
+  background-color: $sec-light;
+}
+
+
+// User Info Menu
+#user-info-menu{
+  background: linear-gradient(to bottom, $pri-dark 0%, $sec-dark 100%);
+  box-shadow: 1px 3px 6px $pri;
+  padding: 2rem 0;
+  right: $header-wrap;
+  top: $header-height;
+  z-index: 999;
+}
+#user-info-menu li{
+  width: 12rem;
+}
+#user-info-menu a{
+  color: $white;
+  font-size: 1.125rem;
+  padding: 0.625rem 0;
+}
+#user-info-menu a:hover{
+  background-color: $sec-light;
+  color: $pri-light;
+}
+
+
+
+
+.admin{background: linear-gradient(to bottom, $sec-light 0%, $sec 100%); box-shadow: 1px 1px 3px $sec-dark; top: 3.5rem; z-index: 98;}
+.admin li a{color: $white; font-size: 1.125rem; padding: 0.625rem 1.5rem;}
+.admin li a:hover{background: $sec;}
+

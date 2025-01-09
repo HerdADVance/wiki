@@ -2,7 +2,7 @@
 import { addBaseProperties } from './util.js';
 
 let registrationForm = {
-	submitText: 'Registration',
+	submitText: 'Register',
 	fields: [
 		{
 			display: 'Email',
@@ -28,6 +28,7 @@ let registrationForm = {
 		},
 		{
 			display: 'Confirm Password',
+			type: 'password',
 			required: true,
 			minLength: 5,
 			maxLength: 25,

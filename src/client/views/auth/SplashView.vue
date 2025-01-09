@@ -12,7 +12,7 @@
 	// Router 
 	const router = useRouter();
 	const route = useRoute();
-	
+
 	// Forms
 	const loginForm = ref(LoginForm);
 	const registrationForm = ref(RegistrationForm);
@@ -26,17 +26,17 @@
 
 	// Requests
 	const loginRequest = async () => {
+		clearFormErrors(loginForm);
 		const validationErrors = loginValidator(loginForm);
 		if(validationErrors) displayFormErrors(loginForm, validationErrors);
 		else{
-			clearFormErrors(loginForm);
 			const data = gatherValidData(loginForm.value.fields);
 			try{
-				const response = await api.post('/login', data);
+				console.log(data);
+				const response = await api.post('login', data);
 				console.log(response.data);
 				router.push({ name: 'topics' })
 			} catch(error){
-				console.log(error);
 				console.log(error.response.data.message);
 			}
 		}
@@ -45,7 +45,7 @@
 	const registrationRequest = async () => {
 		const registrationData = registrationValidator(registrationForm);
 		try{
-			const response = await api.post('/register', registrationData);
+			const response = await api.post('register', registrationData);
 		} catch(error){
 			console.log(error);
 		} 
@@ -55,24 +55,34 @@
 
 
 <template>
-	<div class="tall wide flex flex-col">
+	<div class="row tall full">
 		
-		<template v-if="showLogin">
-			<h1>Login</h1>
-			<form @submit.prevent="loginRequest">
-				<Form :form="loginForm" />
-			</form>
-			<button @click="toggleShowLogin">Register</button>
-		</template>
+		<div class="col-8 splash-image img-bg rel">
+			<div class="overlay open">
+				<p class="bold">Save all of the knowledge you never want to forget in one easily accessible place</p>
+			</div>
+		</div>
+		
+		<div class="col-4 splash-auth flex flex-center flex-col">
+			<div>
+				<img src="/assets/img/logo2.png" alt="Devpedia logo">
+				<template v-if="showLogin">
+					<form @submit.prevent="loginRequest" class="form-auth">
+						<Form :form="loginForm" :showLabel="false" />
+					</form>
+					<p class="center no-mar"><a @click="toggleShowLogin">Don't have an account? Register</a></p>
 
-		<template v-else>
-			<h1>Register</h1>
-			<form @submit.prevent="registrationRequest">
-				<Form :form="registrationForm" />
-			</form>
-			<button @click="toggleShowLogin">Login</button>
-		</template>
+				</template>
 
-	</div>
+				<template v-else>
+					<form @submit.prevent="registrationRequest" class="form-auth">
+						<Form :form="registrationForm" :showLabel="false" />
+					</form>
+					<p class="center no-mar"><a @click="toggleShowLogin">Already have an account? Login</a></p>
+				</template>
+			</div>
+		</div>
+
+	</div>	
 </template>
 

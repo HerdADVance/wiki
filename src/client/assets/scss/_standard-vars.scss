@@ -1,17 +1,19 @@
 @use 'sass:color';
 
 // Colors
-$pri: #222;
-$sec: #222;
+$pri: #1D366F;
+$sec: #08C076;
 $ter: #222;
-$white: #f5fcfd;
+$white: #f2f2e3;
+$error: crimson;
 
-$pri-dark: color.scale($pri, $lightness: -40%);
-$sec-dark: color.scale($sec, $lightness: -40%);
-$ter-dark: color.scale($ter, $lightness: -40%);
+$pri-dark: color.scale($pri, $lightness: -20%);
+$sec-dark: color.scale($sec, $lightness: -20%);
+$ter-dark: color.scale($ter, $lightness: -20%);
 $pri-light: color.scale($pri, $lightness: 10%);
 $sec-light: color.scale($sec, $lightness: 10%);
 $ter-light: color.scale($ter, $lightness: 10%);
+
 
 // Top Level Backgrounds & Color
 $body-bg: $white;
@@ -19,9 +21,9 @@ $body-color: #333;
 $main-bg: $white;
 $main-color: #333;
 
-// Wrap & Container
+// Wraps & Container
 $wrap: 10%;
-$con: 1rem 0;
+$con: 3rem 0;
 
 // Font Size, Paragraphs and Text
 $font-size: 16px;
@@ -31,7 +33,7 @@ $p-mar-bot: 1.5rem;
 $p-size: 1.25rem;
 
 // Links & Nav
-$link-color: cyan;
+$link-color: $pri;
 $nav-base-bg: none;
 $nav-bg: none;
 $nav-bg-hover: none;
@@ -68,13 +70,13 @@ $td-padding: 5px;
 $label-color: #333;
 $label-mar-bot: 0.375rem;
 $label-size: 0.875rem;
-$input-bg: linear-gradient(to bottom, #fffdfd 0%, #fff4f4 100%);
-$input-border: 1px solid #333;
+$input-bg: #f4f9ff;
+$input-border: 1px solid #CCC;
 $input-mar-bot: 1rem;
 $input-padding: 0.75rem 0.625rem;
 
 // Buttons
-$button-bg: linear-gradient(to bottom right, #ac2c2c 0%, #6b1039 100%);
+$button-bg: linear-gradient(to bottom right, $pri 0%, $pri-dark 100%);
 $button-color: white;
 $button-hover-bg: linear-gradient(to bottom right, #ac2c2c 0%, #6b1039 100%);
 $button-mar-top: 1.5rem;
@@ -85,8 +87,8 @@ $button-submit-mar-top: 2rem;
 $button-trans: background 0.25s ease;
 
 // Modals & Overlays
-$overlay-bg: rgba(19,156,113,0.92);
-$overlay-error-bg: rgba(244,4,39,0.92);
+$overlay-bg: rgba(#333, 0.92);
+$overlay-error-bg: rgba(244,4,39, 0.92);
 $modal-bg: white;
 $modal-border-radius: 20px;
 $modal-height: 500px;
@@ -115,8 +117,8 @@ $scroll-track-color: #111;
 $scroll-width: 8px;
 
 // Selected text
-$selected-bg: $ter;
-$selected-color: black;
+$selected-bg: $sec-light;
+$selected-color: $pri;
 
 
 
