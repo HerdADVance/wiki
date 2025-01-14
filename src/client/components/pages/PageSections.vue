@@ -49,7 +49,7 @@
 	<button @click="handleAddSection" class="no-mar">Add Section</button>
 
 	<!-- Draggable list of sections, each in PageSection child -->
-	<draggable :list="model" item-key="id" @change="onSectionDrag">
+	<draggable v-model="model" group="parent" item-key="id" @change="onSectionDrag">
 		<template #item="{ element }">
 			<PageSection :section="element" />
 		</template>

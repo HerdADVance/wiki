@@ -5,7 +5,7 @@
 	import draggable from 'vue3-draggable-next';
 
 	// === COMPONENTS ===
-	import Section from '@/components/pages/PageSectionBlock.vue';
+	import PageSectionBlock from '@/components/pages/PageSectionBlock.vue';
 
 	// === PROPS ===
 	const props = defineProps({
@@ -40,10 +40,12 @@
 <template>
 	<section style="padding: 1rem; border: 1px solid #DDD">
 		<h3>{{ section.title }}</h3>
+		<input type="text" v-model="section.title">
+
 		<!-- Draggable list of blocks as PageSectionBlock child -->
-		<draggable :list="section.blocks" item-key="id" @change="onBlockDrag">
+		<draggable v-model="section.blocks" group="children" item-key="id" :group="{ name: `child-${element.id}`, pull: false, put: false }">
 			<template #item="{ element }">
-				<h4 style="border: 1px solid blue;">Block</h4>
+				<PageSectionBlock :block="element" />
 			</template>
 		</draggable>
 	</section>

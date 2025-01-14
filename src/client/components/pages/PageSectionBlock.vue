@@ -9,7 +9,7 @@
 
 	// === PROPS ===
 	const props = defineProps({
-		item: Object,
+		block: Object,
 	})
 
 	// === COMPOSABLES & EMITS ===
@@ -29,14 +29,14 @@
 	// }
 
 	onMounted(async () => {
-		console.log(props.item);
+		//console.log(props.block);
 	});
 
 </script>
 
 
 <template>
-	<p>Block</p>
+	<h4 style="border: 1px solid green; padding: 0.25rem;">{{ block.content }}</h4>
 </template>
 
 

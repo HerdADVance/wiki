@@ -24,7 +24,7 @@
 			]},
 			{id: 2, order: 2, title: 'Section 2', blocks: [
 				{id: 7, type: 'editor', content: '<p>HTML Content from WYSIWYG #3 here</p>'},
-				{id: 8, type: 'title', content: 'Section 3 Title'},
+				{id: 8, type: 'title', content: 'Section 2 Title'},
 				{id: 9, type: 'editor', content: '<p>HTML Content from WYSIWYG #4 here</p>'},
 			]},
 			{id: 3, order: 3, title: 'Section 3', blocks: [
