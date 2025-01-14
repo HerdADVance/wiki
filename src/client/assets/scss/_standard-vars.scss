@@ -13,6 +13,9 @@ $ter-dark: color.scale($ter, $lightness: -20%);
 $pri-light: color.scale($pri, $lightness: 10%);
 $sec-light: color.scale($sec, $lightness: 10%);
 $ter-light: color.scale($ter, $lightness: 10%);
+$pri-white: color.scale($pri, $lightness: 90%);
+$sec-white: color.scale($sec, $lightness: 90%);
+//#e8ffec
 
 
 // Top Level Backgrounds & Color

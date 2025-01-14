@@ -1,60 +1,57 @@
-<script setup>
-	// const newTopic = ref(null);
-	// const topicsTest = async () => {
-	// 	try{
-	// 		const response = await api.post('topics/create', {title: newTopic.value});
-	// 		console.log(response);
-	// 	} catch(error){
-	// 		console.log(error);
-	// 	}
-	// };
+<script setup>	
 
-// const editorOneId = 'my-editor';
-	// const editorTwoId = 'editor-2';
-	// const { editor: editor1 } = useEditor(editorOneId);
-	// const { editor: editor2 } = useEditor(editorTwoId);
-
+	// === IMPORTS ===
 	import { onMounted, onUnmounted, reactive, ref } from 'vue';
-	import draggable from 'vue3-draggable-next';
-	import { useRoute, useRouter } from 'vue-router';
-	import api from '@/util/api.js';
-	import { useEditor } from '@/composables/useEditor.js';
-	import SearchInput from '@/components/SearchInput.vue';
-	
-	const router = useRouter();
+	import { useRoute } from 'vue-router';
+	import { useApi } from '@/composables/useApi.js';
+
+	// === COMPONENTS ===
+	import PageSections from '@/components/pages/PageSections.vue';
+	import PageTopics from '@/components/pages/PageTopics.vue';
+
+	// === COMPOSABLES ===
+	const { callApi, loading, resData, resError } = useApi();
 	const route = useRoute();
 
+	// === REF/REACTIVE ===
 	let page = reactive({
 		title: null,
-		sections: [],
+		sections: [
+			{id: 1, order: 1, title: 'Section 1', blocks: [
+				{id: 4, type: 'editor', content: '<p>HTML Content from WYSIWYG #1 here</p>'},
+				{id: 5, type: 'title', content: 'Section 1 Title'},
+				{id: 6, type: 'editor', content: '<p>HTML Content from WYSIWYG #2 here</p>'},
+			]},
+			{id: 2, order: 2, title: 'Section 2', blocks: [
+				{id: 7, type: 'editor', content: '<p>HTML Content from WYSIWYG #3 here</p>'},
+				{id: 8, type: 'title', content: 'Section 3 Title'},
+				{id: 9, type: 'editor', content: '<p>HTML Content from WYSIWYG #4 here</p>'},
+			]},
+			{id: 3, order: 3, title: 'Section 3', blocks: [
+				{id: 10, type: 'editor', content: '<p>HTML Content from WYSIWYG #5 here</p>'},
+				{id: 11, type: 'title', content: 'Section 3 Title'},
+				{id: 12, type: 'editor', content: '<p>HTML Content from WYSIWYG #6 here</p>'},
+			]}
+		],
 	});
-	let newSectionId = ref(1);
-
-	onMounted(async () => {
+	
+	// === METHODS ===
+	const getPage = async (id) => {
 		try{
-			const pageId = route.params.id;
-			const response = await api.get('pages/' + pageId);
-			Object.assign(page, response.data.page);
-			//page.value = response.data.page
+			await callApi('get', 'pages/' + id);
+			Object.assign(page, resData.value.page);
 		} catch(error){
-			console.log(error)
-			console.log(error.response.data.message);
+			//console.log(error)
+			//console.log(error.response.data.message);
 		}
+	};
+
+	// === LIFECYCLE HOOKS ===
+	onMounted(async () => {
+		getPage(route.params.id);
 	});
 
-	const handleAddSection = () => {
-		newSectionId.value += 1;
-		page.sections.push({
-			id: newSectionId.value,
-			content: 'Section content #' + newSectionId.value
-		});
-	}
-
-
-	const onSectionDrag = (id, content) => {
-		const section = page.sections.find(b => b.id === id)
-		if (section) section.content = content
-	}
+	
 	
 </script>
 
@@ -62,39 +59,17 @@
 <template>
 	<!-- Page Title -->
 	<h1> {{ page.title }}</h1>
-	
-	<!-- Search Input -->
-	<h2 style="margin-top: 20px;">Topics</h2>
-	<SearchInput 
-		:limit=5
-		requestName="TopicsSearch"
-		requestUrl="topics/search"
-	/>
 
-	<h2 style="margin-top: 40px;">Page Types</h2>
+	<!-- Topics associated with Page -->
+	<PageTopics />
+	
+	<!-- Sections associated with Page -->
+	<PageSections v-model="page.sections" />
+
+	<!-- 	<h2 style="margin-top: 40px;">Page Types</h2>
 	<select>
 		<option></option>
-	</select>
-
-	<h2 style="margin-top: 20px;">Sections</h2>
-	<button @click="handleAddSection" class="no-mar">Add Section</button>
-
-	<draggable v-model="page.sections" item-key="id" @change="onSectionDrag">
-		<template #item="{ element }">
-			<section style="padding: 20px 0; font-size: 1.5rem; border: 1px solid #DDD; cursor: pointer;">
-				{{ element.content }}
-			</section>
-		</template>
-	</draggable>
-
-	<!-- <h1>Node ORM's</h1>
-	<p class="lar">There are several Node Object-Relational Mappers that can be used to connect your database with your backend logic. The most common of these is Sequelize, but other ones like Prisma, Drizzle, TypeORM, and Knex can also be useful choices based on the requirements of your project.</p>
-
-	<h2>Sequelize</h2>
-	<p>The most common of the bunch, it is the standard choice for out of the box object-relational mapping.</p>
-
-	<div :id="editorOneId"></div>
-	<div :id="editorTwoId"></div> -->
+	</select> -->
 
 </template>
 

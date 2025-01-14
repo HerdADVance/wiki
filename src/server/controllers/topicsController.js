@@ -15,6 +15,9 @@ const getTopic = async (req, res, next) => {
 
 const searchTopics = async(req, res, next) => {
   //const topics = await db('topics');
+
+  console.log('searching topics');
+  console.log(req.body);
   
   const topics = await db('topics')
     .select('*')

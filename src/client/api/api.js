@@ -13,3 +13,5 @@ export default {
 		return api.post(url, data);
 	}
 }
+
+import axios from 'axios';
