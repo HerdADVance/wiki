@@ -13,6 +13,12 @@ $ter-dark: color.scale($ter, $lightness: -20%);
 $pri-light: color.scale($pri, $lightness: 10%);
 $sec-light: color.scale($sec, $lightness: 10%);
 $ter-light: color.scale($ter, $lightness: 10%);
+$pri-lighter: color.scale($pri, $lightness: 40%);
+$sec-lighter: color.scale($sec, $lightness: 40%);
+$ter-lighter: color.scale($ter, $lightness: 40%);
+$pri-lightest: color.scale($pri, $lightness: 70%);
+$sec-lightest: color.scale($sec, $lightness: 70%);
+$ter-lightest: color.scale($ter, $lightness: 70%);
 $pri-white: color.scale($pri, $lightness: 90%);
 $sec-white: color.scale($sec, $lightness: 90%);
 //#e8ffec
@@ -120,7 +126,7 @@ $scroll-track-color: #111;
 $scroll-width: 8px;
 
 // Selected text
-$selected-bg: $sec-light;
+$selected-bg: $sec-lightest;
 $selected-color: $pri;
 
 

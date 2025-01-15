@@ -16,6 +16,7 @@
 	// === REF/REACTIVE ===
 	let page = reactive({
 		title: null,
+		topics: [],
 		sections: [
 			{id: 1, order: 1, title: 'Section 1', blocks: [
 				{id: 4, type: 'editor', content: '<p>HTML Content from WYSIWYG #1 here</p>'},
@@ -34,7 +35,10 @@
 			]}
 		],
 	});
+
+	let editMode = ref(false);
 	
+
 	// === METHODS ===
 	const getPage = async (id) => {
 		try{
@@ -44,6 +48,12 @@
 			//console.log(error)
 			//console.log(error.response.data.message);
 		}
+	};
+
+
+	// === EVENTS ===
+	const toggleEditMode = () => {
+		editMode.value = !editMode.value;
 	};
 
 	// === LIFECYCLE HOOKS ===
@@ -57,11 +67,13 @@
 
 
 <template>
+	<button @click="toggleEditMode" style="float: right;">Switch Edit/View Mode</button>
+
 	<!-- Page Title -->
-	<h1> {{ page.title }}</h1>
+	<h1 class="page-title">{{ page.title }}</h1>
 
 	<!-- Topics associated with Page -->
-	<PageTopics />
+	<PageTopics v-model="page.topics" :editMode=editMode />
 	
 	<!-- Sections associated with Page -->
 	<PageSections v-model="page.sections" />

@@ -9,7 +9,7 @@
 	import PageSection from '@/components/pages/PageSection.vue';
 
 	// === PROPS AS MODEL ===
-	const model = defineModel();
+	const sections = defineModel();
 
 	// === COMPOSABLES & EMITS ===
 
@@ -20,7 +20,7 @@
 	// === METHODS ===
 	const handleAddSection = () => {
 		newSectionId.value += 1;
-		model.value.push({
+		sections.value.push({
 			id: newSectionId.value,
 			content: 'Section content #' + newSectionId.value
 		});
@@ -29,13 +29,13 @@
 	const onSectionDrag = (id, content) => {
 		console.log(id)
 		console.log(content)
-		//const section = model.value.find(b => b.id === id)
+		//const section = sections.value.find(b => b.id === id)
 		//console.log(section);
 		//if (section) section.content = content
 	}
 
 	onMounted(async () => {
-		//console.log(model.value);
+		//console.log(sections.value);
 	});
 
 </script>
@@ -43,13 +43,13 @@
 
 
 <template>
-	<h2>Sections</h2>
+	<h2 class="page-subtitle" style="margin-top: 40px;">Sections</h2>
 
 	<!-- Add Section -->
 	<button @click="handleAddSection" class="no-mar">Add Section</button>
 
 	<!-- Draggable list of sections, each in PageSection child -->
-	<draggable v-model="model" group="parent" item-key="id" @change="onSectionDrag">
+	<draggable v-model="sections" group="parent" item-key="id" @change="onSectionDrag">
 		<template #item="{ element }">
 			<PageSection :section="element" />
 		</template>

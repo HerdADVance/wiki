@@ -4,6 +4,7 @@
 @use "header";
 @use "splash";
 @use "transitions";
+@use "page";
 
 
 
@@ -23,7 +24,6 @@ footer{background: $pri; height: 75px;}
 .live-search-results li:hover{background: #FFF;}
 
 button.se-btn{background: none;}
-h1{font-size: 2.25rem; font-weight: bold;}
 main p{font-family: 'Afacad'; font-size: 1.375rem; color: #222; line-height: 2.125rem; margin-bottom: 2rem;}
 
 
