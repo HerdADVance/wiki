@@ -2,15 +2,16 @@
 	
 	// === IMPORTS ===
 	import { ref } from 'vue';
+	import { useSettingsStore } from '@/stores/settingsStore.js';
 
 	// === COMPONENTS ===
-	import LiveSearchInput from '@/components/LiveSearchInput.vue';
+	import LiveSearchInput from '@/components/forms/LiveSearchInput.vue';
+
+	// === STORE ===
+	const store = useSettingsStore();
 
 	// === PROPS AS MODEL ===
 	const topics = defineModel();
-	const props = defineProps({
-		editMode: Boolean,
-	})
 
 	// === METHODS ===
 	const handleResultClick = (topic) => {
@@ -43,7 +44,7 @@
 
 	<!-- Search input to add new Topics -->
 	<LiveSearchInput
-		v-if="editMode"
+		v-if="store.editMode"
 		table="topics"
 		:limit=5
 		@emitClickedResult="handleResultClick"

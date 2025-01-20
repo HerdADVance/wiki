@@ -1,17 +1,14 @@
 <script setup>
 	import { ref } from 'vue';
-	import { RouterView, useRoute, useRouter } from 'vue-router';
-	import api from '@/util/api.js';
-
-	import Form from '@/components/Form.vue';
+	import { useAuthStore } from '@/stores/authStore.js';
+	import Form from '@/components/forms/Form.vue';
 	import LoginForm from '@/forms/loginForm.js';
 	import RegistrationForm from '@/forms/registrationForm.js';
 	import { clearFormErrors, displayFormErrors, gatherValidData } from '@/forms/util.js';
 	import { loginValidator, registrationValidator } from '@/validators/authValidators.js';
 
-	// Router 
-	const router = useRouter();
-	const route = useRoute();
+	// Auth Store 
+	const authStore = useAuthStore();
 
 	// Forms
 	const loginForm = ref(LoginForm);
@@ -31,14 +28,7 @@
 		if(validationErrors) displayFormErrors(loginForm, validationErrors);
 		else{
 			const data = gatherValidData(loginForm.value.fields);
-			try{
-				console.log(data);
-				const response = await api.post('login', data);
-				console.log(response.data);
-				router.push({ name: 'topics' })
-			} catch(error){
-				console.log(error.response.data.message);
-			}
+			await authStore.login(data);
 		}
 	};
 

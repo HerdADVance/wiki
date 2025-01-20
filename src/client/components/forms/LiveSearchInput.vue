@@ -5,7 +5,7 @@
 	import { useApi } from '@/composables/useApi.js';
 
 	// === COMPOSABLES & EMITS ===
-	const { callApi, loading, resData, resError } = useApi();
+	const { apiCall, apiLoading, apiData, apiError } = useApi();
 	const emit = defineEmits(['emitClickedResult']);
 
 	// === PROPS & DERIVED ===
@@ -28,8 +28,8 @@
 	// ~ CALL API for Search Results (if search input not blank)
 	const sendRequest = async () => {
 		if (reqData.input != ''){
-			await callApi('post', reqUrl, reqData);
-			displaySearchResults(resData.value.results);
+			await apiCall('post', reqUrl, reqData);
+			displaySearchResults(apiData.value.results);
 		}
 	};
 

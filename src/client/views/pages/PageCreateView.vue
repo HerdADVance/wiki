@@ -1,7 +1,7 @@
 <script setup>
 	import { onMounted, onUnmounted, ref } from 'vue';
 	import { useRoute, useRouter } from 'vue-router';
-	import Form from '@/components/Form.vue';
+	import Form from '@/components/forms/Form.vue';
 	import CreatePageForm from '@/forms/createPageForm.js';
 	import api from '@/util/api.js';
 	import { clearFormErrors, displayFormErrors, gatherValidData } from '@/forms/util.js';

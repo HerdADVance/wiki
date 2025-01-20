@@ -15,6 +15,7 @@ const getPages = async (req, res, next) => {
 const getPage = async (req, res, next) => {
   const pageId = req.params.pageId;
   console.log('getting page ' + pageId);
+  //console.log(req.session.passport.user);
   try { 
     const foundPage = await PagesRepository.findById(pageId);
     if(!foundPage) return res.status(401).json({message: "Couldn't find that page in the database"});

@@ -2,12 +2,12 @@ import { ref } from 'vue';
 import api from '@/util/api.js';
 
 export function useApi() {
-  const loading = ref(false);
-  const resData = ref(null);
-  const resError = ref(null);
+  const apiLoading = ref(false);
+  const apiData = ref(null);
+  const apiError = ref(null);
 
-  const callApi = async (reqType='get', reqUrl='', reqData={}) => {
-    loading.value = true;
+  const apiCall = async (reqType='get', reqUrl='', reqData={}) => {
+    apiLoading.value = true;
     let response = null;
     try { 
       if (reqType === 'get') {
@@ -15,13 +15,13 @@ export function useApi() {
       } else{
         response = await api.post(reqUrl, reqData);
       }
-      resData.value = response.data;
+      apiData.value = response.data;
     } catch (err) {
-      resError.value = err;
+      apiError.value = err;
     } finally {
-      loading.value = false;
+      apiLoading.value = false;
     }
   };
 
-  return { callApi, loading, resData, resError };
+  return { apiCall, apiData, apiError, apiLoading };
 }

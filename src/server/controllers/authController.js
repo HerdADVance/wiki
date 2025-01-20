@@ -7,40 +7,6 @@ const formatErrors = require('../util/formatErrors.js');
 const hashPassword = require('../util/hashPassword.js');
 const verifyPassword = require('../util/verifyPassword.js');
 
-const loginTest = async (req, res, next) => {
-	console.log('loginTest route from server');
-	console.log(req.body);
-	return res.status(200).json({abc: '123'});
-};
-
-const login = async (req, res, next) => {
-	const messages = req.session.messages || [];
-  	const mostRecentMessage = messages[messages.length - 1];
-    //req.session.messages = [];
-	req.session.touch();
-	res.render('auth/login');
-};
-
-const register = async (req, res, next) => {
-	res.render('auth/register');
-};
-
-const splash = async (req, res, next) => {
-	res.render('auth/splash');
-};
-
-
-const logout = async (req, res, next) => {
-	req.logout(function(err) {
-		if (err) { return next(err); }
-
-		req.session.destroy(function(err) {
-		  if (err) { return next(err); }
-		  res.clearCookie('connect.sid');
-		  res.redirect('/');
-		});
-	});
-};
 
 const loginCheck = (req, res, next) => {
 	console.log('loginCheck route from server');
@@ -62,7 +28,6 @@ const loginCheck = (req, res, next) => {
 
 
 const registerCheck = async (req, res, next) => {
-
 	// Return validation error(s) message if needed
 	const errors = validationResult(req);
 	console.log(errors)
@@ -85,13 +50,57 @@ const registerCheck = async (req, res, next) => {
 		
 };
 
+const validateUser = async (req, res, next) => {
+	if (req.session.passport?.user) {
+    return res.status(200).json({ user: req.session.passport.user });
+  } else {
+    return res.status(200).json({ user: null });
+	};
+};
+
+
+const logout = async (req, res, next) => {
+	req.logout(function(err) {
+		if (err) { return next(err); }
+
+		req.session.destroy(function(err) {
+		  if (err) { return next(err); }
+		  res.clearCookie('connect.sid');
+		  return res.status(200).json({ message: "User logged out" });
+		});
+	});
+};
+
+// const login = async (req, res, next) => {
+// 	const messages = req.session.messages || [];
+//   	const mostRecentMessage = messages[messages.length - 1];
+//     //req.session.messages = [];
+// 	req.session.touch();
+// 	res.render('auth/login');
+// };
+
+// const loginTest = async (req, res, next) => {
+// 	console.log('loginTest route from server');
+// 	console.log(req.body);
+// 	return res.status(200).json({abc: '123'});
+// };
+
+// const register = async (req, res, next) => {
+// 	res.render('auth/register');
+// };
+
+// const splash = async (req, res, next) => {
+// 	res.render('auth/splash');
+// };
+
 
 module.exports = {
-	register,
-	login,
 	loginCheck,
-	loginTest,
-	logout,
 	registerCheck,
-	splash
+	validateUser,
+	logout,
+	// login,
+	// loginTest,
+	// register,
+	// splash
 }

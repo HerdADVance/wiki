@@ -4,13 +4,17 @@
 	import { onMounted, onUnmounted, reactive, ref } from 'vue';
 	import { useRoute } from 'vue-router';
 	import { useApi } from '@/composables/useApi.js';
+	import { useSettingsStore } from '@/stores/settingsStore.js';
 
 	// === COMPONENTS ===
 	import PageSections from '@/components/pages/PageSections.vue';
 	import PageTopics from '@/components/pages/PageTopics.vue';
 
+	// === STORE ===
+	const store = useSettingsStore();
+
 	// === COMPOSABLES ===
-	const { callApi, loading, resData, resError } = useApi();
+	const { apiCall, apiLoading, apiData, apiError } = useApi();
 	const route = useRoute();
 
 	// === REF/REACTIVE ===
@@ -36,25 +40,19 @@
 		],
 	});
 
-	let editMode = ref(false);
 	
 
 	// === METHODS ===
 	const getPage = async (id) => {
 		try{
-			await callApi('get', 'pages/' + id);
-			Object.assign(page, resData.value.page);
+			await apiCall('get', 'pages/' + id);
+			Object.assign(page, apiData.value.page);
 		} catch(error){
 			//console.log(error)
 			//console.log(error.response.data.message);
 		}
 	};
 
-
-	// === EVENTS ===
-	const toggleEditMode = () => {
-		editMode.value = !editMode.value;
-	};
 
 	// === LIFECYCLE HOOKS ===
 	onMounted(async () => {
@@ -67,13 +65,13 @@
 
 
 <template>
-	<button @click="toggleEditMode" style="float: right;">Switch Edit/View Mode</button>
+	<button @click="store.toggleEditMode" style="float: right;">Switch Edit/View Mode</button>
 
 	<!-- Page Title -->
 	<h1 class="page-title">{{ page.title }}</h1>
 
 	<!-- Topics associated with Page -->
-	<PageTopics v-model="page.topics" :editMode=editMode />
+	<PageTopics v-model="page.topics" />
 	
 	<!-- Sections associated with Page -->
 	<PageSections v-model="page.sections" />

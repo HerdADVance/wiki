@@ -6,18 +6,21 @@ const verifyPassword = require('../util/verifyPassword.js');
 
 // (DE)SERIALIZERS
 passport.serializeUser((user, done) => {
-    done(null, user.id);
+	done(null, {
+		id: user.id,
+		username: user.username
+	});
 });
 
-passport.deserializeUser(async (id, done) => {
-    try{
-        const userQuery = await UserRepository.findById(id);
-        let foundUser = userQuery.foundUser;
-        if(!foundUser) throw new Error(userQuery.error);
-        done(null, foundUser)
-    } catch(err){
-        done(err, null);
-    }
+passport.deserializeUser(async (user, done) => {
+  try{
+      const userQuery = await UserRepository.findById(user.id);
+      let foundUser = userQuery.foundUser;
+      if(!foundUser) throw new Error(userQuery.error);
+      done(null, foundUser)
+  } catch(err){
+      done(err, null);
+  }
 });
 
 
