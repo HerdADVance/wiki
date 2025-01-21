@@ -7,6 +7,5 @@ export const loginValidator = (form) => {
 }
 
 export const registrationValidator = (form) => {
-	const data = baseValidator(form.value.fields);
-	return data;
+	return baseValidator(form.value.fields);
 }

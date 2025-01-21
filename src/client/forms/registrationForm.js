@@ -6,33 +6,44 @@ let registrationForm = {
 	fields: [
 		{
 			display: 'Email',
-			required: true,
-			minLength: 5,
-			maxLength: 25,
-			value: 'muh username'
+			value: 'aaa@aaaaaaa.com',
+			validators: [
+				{email: true},
+				{required: true},
+				{minLength: 5},
+				{maxLength: 50}
+			]
 		},
 		{
 			display: 'Username',
-			required: true,
-			minLength: 5,
-			maxLength: 25,
-			value: 'muh username'
+			value: 'ppppp',
+			validators: [
+				{email: false},
+				{required: true},
+				{minLength: 5},
+				{maxLength: 25}
+			]
 		},
 		{	
 			display: 'Password',
 			type: 'password',
-			required: true,
-			minLength: 5,
-			maxLength: 25,
-			value: 'muh password'
+			value: 'alexvance',
+			validators: [
+				{required: true},
+				{minLength: 5},
+				{maxLength: 25}
+			]
 		},
 		{
 			display: 'Confirm Password',
+			name: 'passwordConfirm',
 			type: 'password',
-			required: true,
-			minLength: 5,
-			maxLength: 25,
-			value: 'muh password'
+			value: 'alexvance',
+			validators: [
+				{required: true},
+				{minLength: 5},
+				{maxLength: 25}
+			]
 		},
 	]
 };

@@ -33,12 +33,14 @@
 	};
 
 	const registrationRequest = async () => {
-		const registrationData = registrationValidator(registrationForm);
-		try{
-			const response = await api.post('register', registrationData);
-		} catch(error){
-			console.log(error);
-		} 
+		clearFormErrors(registrationForm);
+		const validationErrors = registrationValidator(registrationForm);
+		if(validationErrors) displayFormErrors(registrationForm, validationErrors);
+		else{
+			const data = gatherValidData(registrationForm.value.fields);
+			await authStore.register(data);
+			//const response = await api.post('register', registrationData);
+		}
 	};
 
 </script>
@@ -61,7 +63,6 @@
 						<Form :form="loginForm" :showLabel="false" />
 					</form>
 					<p class="center no-mar"><a @click="toggleShowLogin">Don't have an account? Register</a></p>
-
 				</template>
 
 				<template v-else>

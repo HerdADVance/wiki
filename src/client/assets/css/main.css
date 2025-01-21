@@ -893,6 +893,28 @@ input[type=submit]:hover {
   opacity: 0;
 }
 
+.live-search-results {
+  box-shadow: 5px 3px 15px rgb(23.2, 43.2, 88.8);
+  position: absolute;
+  width: 50%;
+  z-index: 3;
+}
+
+.live-search-results li {
+  background: rgb(225.6642857143, 232.2714285714, 247.3357142857);
+  border: 1px solid #CCC;
+  font-size: 1.25rem;
+  padding: 0.5rem 1rem;
+}
+
+.live-search-results li:nth-child(even) {
+  background: rgb(225.24, 253.76, 242.29);
+}
+
+.live-search-results li:hover {
+  background: #FFF;
+}
+
 h1.page-title {
   border-bottom: 2px solid #DDD;
   color: rgb(36.6642857143, 68.2714285714, 140.3357142857);
@@ -949,32 +971,6 @@ body {
 footer {
   background: #1D366F;
   height: 75px;
-}
-
-.live-search-input {
-  width: 50%;
-}
-
-.live-search-results {
-  box-shadow: 5px 3px 15px rgb(23.2, 43.2, 88.8);
-  position: absolute;
-  width: 50%;
-  z-index: 3;
-}
-
-.live-search-results li {
-  background: rgb(225.6642857143, 232.2714285714, 247.3357142857);
-  border: 1px solid #CCC;
-  font-size: 1.25rem;
-  padding: 0.5rem 1rem;
-}
-
-.live-search-results li:nth-child(even) {
-  background: rgb(225.24, 253.76, 242.29);
-}
-
-.live-search-results li:hover {
-  background: #FFF;
 }
 
 button.se-btn {

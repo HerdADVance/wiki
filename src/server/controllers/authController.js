@@ -15,13 +15,13 @@ const loginCheck = (req, res, next) => {
 			return next(err);
 		}
 		if(!user){
-			return res.status(401).json({message: info.message});
+			return res.status(401).json({message: info.message, user: {} });
 		}
 		req.logIn(user, (err) => {
 			if(err){
 				return next(err);
 			}
-			return res.status(200).json({message: 'Auth successful', user});
+			return res.status(200).json({message: 'Auth successful', user: { id: user.id, username: user.username } });
 		});
 	})(req, res, next);
 }
@@ -29,6 +29,7 @@ const loginCheck = (req, res, next) => {
 
 const registerCheck = async (req, res, next) => {
 	// Return validation error(s) message if needed
+	console.log(req.body);
 	const errors = validationResult(req);
 	console.log(errors)
 	if (!errors.isEmpty()) {
@@ -41,20 +42,19 @@ const registerCheck = async (req, res, next) => {
 	// Add new user to database or return error message
 	try {
 		const newUser = await UserRepository.create(req.body);
+		console.log(newUser);
+		return res.status(201).json({user: {id: newUser.id, username: newUser.username} });
 	} catch (error) {
 		return res.status(400).json({details: "There was a problem attempting to create a new user"});
-	}
-
-	// Redirect newly registered and logged in user to welcome page	
-	return res.status(201).json({details: "New user created"});
-		
+	}		
 };
+
 
 const validateUser = async (req, res, next) => {
 	if (req.session.passport?.user) {
-    return res.status(200).json({ user: req.session.passport.user });
+    return res.status(200).json({ isValidated: true, user: req.session.passport.user });
   } else {
-    return res.status(200).json({ user: null });
+    return res.status(200).json({ isValidated: false });
 	};
 };
 

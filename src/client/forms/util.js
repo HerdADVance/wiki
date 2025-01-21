@@ -2,7 +2,7 @@
 // Adds name, error, and value fields to newly created form before placed in ref
 export const addBaseProperties = (form) => {
 	form.fields.forEach((field) => {
-		field.name = createNameFromDisplay(field.display); 
+		if(!field.name) field.name = createNameFromDisplay(field.display); 
 		field.error = null;
 		if(!field.value) field.value = null;
 	});

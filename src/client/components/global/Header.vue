@@ -23,6 +23,10 @@
     authStore.logout();
   }
 
+  const handleResultClick = (topic) => {
+    console.log(topic);
+  };
+
   // ~ User Info Options Toggle
   const toggleUserInfoOpen = () => {
     userInfoOpen.value = !userInfoOpen.value;
@@ -47,7 +51,14 @@
 
       <!-- Search input (2/3) -->
       <form class="center">
-        <input type="text" class="no-mar wide" placeholder="Search Topics/Pages">
+        <LiveSearchInput
+          table="topics"
+          classes="wide"
+          placeholder="Search pages/topics"
+          :limit=5
+          @emitClickedResult="handleResultClick"
+        />
+        <!--input type="text" class="no-mar wide" placeholder="Search Topics/Pages"-->
       </form>
       
       <!-- User Info Toggle & Menu (3/3 if logged in) -->

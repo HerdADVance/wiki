@@ -27,20 +27,21 @@ export const useAuthStore = defineStore('auth', () => {
 	};
 
 	const register = async (reqData) => {
-		await apiCall('post', 'register', reqData);	
-		//router.push({ name: 'dashboard' });
+		await apiCall('post', 'register', reqData);
+		setUser(apiData.value.user);
+		router.push({ name: 'dashboard' });
 	};
 
 	const setUser = (userData) => {
-		console.log(userData);
+		console.log('setting user');
 		user.value = userData;
 	};
 	
 	const validateUser = async () => {
 		await apiCall('get', 'validate-user');
-		console.log(apiData.value);
-		const userData = apiData.value.user;
-		if (userData) setUser(userData);
+		const isValidated = apiData.value.isValidated;
+		if (isValidated) setUser(apiData.value.user);
+		return isValidated;
 	};
 
 	// === RETURN ===

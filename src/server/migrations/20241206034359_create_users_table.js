@@ -8,7 +8,8 @@ exports.up = function(knex) {
         table.string('email', 255).unique().notNullable();
         table.string('username', 25).unique().notNullable();
         table.string('password', 25).notNullable();
-        table.integer('role');
+        //table.integer('role');
+        table.foreign('role_id').references('roles.id').onDelete('CASCADE');
         table.timestamps(true, true);
     });
 };

@@ -30,13 +30,15 @@ router.beforeEach(async (to, from, next) => {
   
   // If no user in store, check if validated and set in store if so
   if(!authStore.user){
-    await authStore.validateUser();
+    if(1==1){// is in localStorage
+      await authStore.validateUser();
+    }
   }
   
   if (to.meta.requiresAuth) {
-    //const user = await authStore.validateUser();
-    //next({ name: 'topics' });
-    next();
+    const isValidated = await authStore.validateUser();
+    if (!isValidated) next({ name: 'splash' });
+    else next();
   } else{
   	//console.log('no auth');
     //next({ name: 'splash' });

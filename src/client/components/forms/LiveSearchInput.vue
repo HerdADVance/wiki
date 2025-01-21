@@ -11,7 +11,9 @@
 	// === PROPS & DERIVED ===
 	const props = defineProps({
 		limit: Number,
-		table: String
+		table: String,
+		classes: String,
+		placeholder: String
 	})
 	const reqUrl = props.table + '/search';
 
@@ -70,8 +72,8 @@
 	<input 
 		v-model="reqData.input" 
 		@input="onInputChange" 
-		class="no-mar live-search-input"
-		:placeholder="`Search to add ${table}`"
+		:class="`live-search-input no-mar ${classes}`"
+		:placeholder="`${placeholder}`"
 	>
 
 	<!-- Search results list -->

@@ -46,6 +46,7 @@
 	<LiveSearchInput
 		v-if="store.editMode"
 		table="topics"
+		placeholder="Type to add new topics"
 		:limit=5
 		@emitClickedResult="handleResultClick"
 	/>

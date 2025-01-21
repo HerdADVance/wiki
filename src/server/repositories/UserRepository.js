@@ -9,7 +9,7 @@ class UserRepository {
 			password: user.password
 		};
 
-		const [newUser] = await db('users').insert(newUserData).returning('username');
+		const [newUser] = await db('users').insert(newUserData).returning(['id', 'username']);
 		return newUser;
 	}
 	
