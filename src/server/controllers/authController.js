@@ -29,7 +29,6 @@ const loginCheck = (req, res, next) => {
 
 const registerCheck = async (req, res, next) => {
 	// Return validation error(s) message if needed
-	console.log(req.body);
 	const errors = validationResult(req);
 	console.log(errors)
 	if (!errors.isEmpty()) {
@@ -41,6 +40,7 @@ const registerCheck = async (req, res, next) => {
 
 	// Add new user to database or return error message
 	try {
+		req.body.role_id = 3;
 		const newUser = await UserRepository.create(req.body);
 		console.log(newUser);
 		return res.status(201).json({user: {id: newUser.id, username: newUser.username} });

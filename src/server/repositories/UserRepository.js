@@ -6,7 +6,8 @@ class UserRepository {
 		const newUserData = {
 			email: user.email,
 			username: user.username,
-			password: user.password
+			password: user.password,
+			role_id: user.role_id
 		};
 
 		const [newUser] = await db('users').insert(newUserData).returning(['id', 'username']);
