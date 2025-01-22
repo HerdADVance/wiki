@@ -11,7 +11,7 @@
   <!-- Nav Bar -->
   <nav class="admin sticky">
     <ul class="flex">
-      <li><RouterLink to="/page/create">Create Page</Routerlink></li>
+      <li><RouterLink :to="{ name: 'PageCreate'}">Create Page</Routerlink></li>
     </ul>
   </nav>
 

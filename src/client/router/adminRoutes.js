@@ -1,12 +1,20 @@
 
 const loadView = (view) => {
-  return () => import(`@/views/admimn/${view}.vue`);
+  return () => import(`@/views/admin/${view}.vue`);
+};
+
+// All admin routes require the user to be an editor or higher
+const editorMeta = {
+  requiresEditor: true,
 };
 
 const adminRoutes = [
-	{path: "/page/:id", name: "Page", component: loadView('PageView')},
-	{path: "/pages", name: "Pages", component: loadView('PagesView')},
-	{path: "/page/create", name: "PageCreate", component: loadView('PageCreateView'), meta: {requiresAuth: true} },
+	{
+		path: "/admin/page/create",
+		name: "PageCreate", 
+		component: loadView('PageCreateView'), 
+		meta: editorMeta
+	},
 ];
 
 export default adminRoutes;

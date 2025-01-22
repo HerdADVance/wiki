@@ -50,6 +50,17 @@ const registerCheck = async (req, res, next) => {
 };
 
 
+const validateEditor = async (req, res, next) => {
+	if (req.session.passport?.user) {
+		console.log(req.session.passport.user);
+		if(req.session.passport.user.role === 1 || req.session.passport.user.role === 2){
+    	return res.status(200).json({ isEditor: true, user: req.session.passport.user });
+    }
+  }
+  return res.status(200).json({ isEditor: false });
+};
+
+
 const validateUser = async (req, res, next) => {
 	if (req.session.passport?.user) {
     return res.status(200).json({ isValidated: true, user: req.session.passport.user });
@@ -97,6 +108,7 @@ const logout = async (req, res, next) => {
 module.exports = {
 	loginCheck,
 	registerCheck,
+	validateEditor,
 	validateUser,
 	logout,
 	// login,

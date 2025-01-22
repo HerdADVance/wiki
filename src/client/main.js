@@ -34,8 +34,14 @@ router.beforeEach(async (to, from, next) => {
       await authStore.validateUser();
     }
   }
+
+  if (to.meta.requiresEditor) {
+    const isEditor = await authStore.validateEditor();
+    if (!isEditor) next({ name: 'splash' });
+    else next();
+  }
   
-  if (to.meta.requiresAuth) {
+  else if (to.meta.requiresAuth) {
     const isValidated = await authStore.validateUser();
     if (!isValidated) next({ name: 'splash' });
     else next();

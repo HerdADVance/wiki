@@ -6,7 +6,7 @@ let loginForm = {
 	fields: [
 		{
 			display: 'Username',
-			value: 'jjjjj',
+			value: 'vance',
 			validators: [
 				{email: false},
 				{required: true},

@@ -8,7 +8,8 @@ const verifyPassword = require('../util/verifyPassword.js');
 passport.serializeUser((user, done) => {
 	done(null, {
 		id: user.id,
-		username: user.username
+		username: user.username,
+		role: user.role_id
 	});
 });
 

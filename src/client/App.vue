@@ -28,7 +28,7 @@
 
   // === LIFECYCLE HOOKS ===
   onMounted(async () => {
-    console.log('app mounted');
+    //console.log('app mounted');
   })
 
 
