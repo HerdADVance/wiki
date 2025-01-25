@@ -50,9 +50,17 @@ const registerCheck = async (req, res, next) => {
 };
 
 
+const validateAdmin = async (req, res, next) => {
+	if (req.session.passport?.user) {
+		if(req.session.passport.user.role === 1){
+    	return res.status(200).json({ isAdmin: true, user: req.session.passport.user });
+    }
+  }
+  return res.status(200).json({ isAdmin: false });
+};
+
 const validateEditor = async (req, res, next) => {
 	if (req.session.passport?.user) {
-		console.log(req.session.passport.user);
 		if(req.session.passport.user.role === 1 || req.session.passport.user.role === 2){
     	return res.status(200).json({ isEditor: true, user: req.session.passport.user });
     }
@@ -108,6 +116,7 @@ const logout = async (req, res, next) => {
 module.exports = {
 	loginCheck,
 	registerCheck,
+	validateAdmin,
 	validateEditor,
 	validateUser,
 	logout,

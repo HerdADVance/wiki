@@ -37,10 +37,15 @@ export const useAuthStore = defineStore('auth', () => {
 		user.value = userData;
 	};
 	
+	const validateAdmin = async () => {
+		await apiCall('get', 'validate-admin');
+		const isAdmin = apiData.value.isAdmin;
+		return isAdmin;
+	};
+
 	const validateEditor = async () => {
 		await apiCall('get', 'validate-editor');
 		const isEditor = apiData.value.isEditor;
-		console.log(isEditor);
 		return isEditor;
 	};
 
@@ -52,6 +57,6 @@ export const useAuthStore = defineStore('auth', () => {
 	};
 
 	// === RETURN ===
-	return { login, logout, register, user, validateEditor, validateUser }
+	return { login, logout, register, user, validateAdmin, validateEditor, validateUser }
 
 });

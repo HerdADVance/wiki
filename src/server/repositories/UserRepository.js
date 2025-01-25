@@ -13,6 +13,20 @@ class UserRepository {
 		const [newUser] = await db('users').insert(newUserData).returning(['id', 'username']);
 		return newUser;
 	}
+
+	static async delete(id){
+		const foundUser = await this.findById(id);
+		const deletion = await db('users').where('id', foundUser.foundUser.id).del();
+		console.log(deletion);
+		return;
+	}
+
+	static async getAllUsers(){
+		const users = await db('users')
+			.select('users.*', 'roles.title as role_title')
+  		.leftJoin('roles', 'users.role_id', 'roles.id');;
+		return users;
+	}
 	
 	static async findById(id){
 		try{

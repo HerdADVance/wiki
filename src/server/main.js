@@ -16,6 +16,7 @@ const authRoutes = require('./routes/auth.js');
 const mainRoutes = require('./routes/main.js');
 const topicsRoutes = require('./routes/topics.js');
 const pagesRoutes = require('./routes/pages.js');
+const usersRoutes = require('./routes/users.js');
 
 // Port variable
 const port = process.env.PORT || 8000;
@@ -44,6 +45,7 @@ app.use('/', mainRoutes);
 app.use('/api', authRoutes);
 app.use('/api/topics', topicsRoutes);
 app.use('/api/pages', pagesRoutes);
+app.use('/api/users', usersRoutes);
 
 
 // Error Handlers

@@ -35,9 +35,15 @@ router.beforeEach(async (to, from, next) => {
     }
   }
 
-  if (to.meta.requiresEditor) {
+  if (to.meta.requiresAdmin) {
+    const isAdmin = await authStore.validateAdmin();
+    if (!isAdmin) next({ name: 'dashboard' });
+    else next();
+  }
+
+  else if (to.meta.requiresEditor) {
     const isEditor = await authStore.validateEditor();
-    if (!isEditor) next({ name: 'splash' });
+    if (!isEditor) next({ name: 'dashboard' });
     else next();
   }
   

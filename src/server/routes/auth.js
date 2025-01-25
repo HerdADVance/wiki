@@ -5,6 +5,7 @@ const {
   loginCheck,
   logout,
   registerCheck,
+  validateAdmin,
   validateEditor,
   validateUser,
   // login,
@@ -24,6 +25,7 @@ const router = express.Router();
 router.post('/login', loginCheck);
 router.post('/logout', logout);
 router.post('/register', UserValidator.register(), registerCheck);
+router.get('/validate-admin', validateAdmin);
 router.get('/validate-editor', validateEditor);
 router.get('/validate-user', validateUser);
 

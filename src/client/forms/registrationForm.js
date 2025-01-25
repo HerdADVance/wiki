@@ -6,7 +6,7 @@ let registrationForm = {
 	fields: [
 		{
 			display: 'Email',
-			value: 'aaa@aaaaaaa.com',
+			value: 'bbb@bbb.com',
 			validators: [
 				{email: true},
 				{required: true},
@@ -16,7 +16,7 @@ let registrationForm = {
 		},
 		{
 			display: 'Username',
-			value: 'ppppp',
+			value: 'reader',
 			validators: [
 				{email: false},
 				{required: true},
