@@ -28,7 +28,7 @@ class UserRepository {
 		return users;
 	}
 	
-	static async findById(id){
+	static async findById(id, abc){
 		try{
 			const foundUser = await db('users').where({ id }).select('id', 'username').first();
 			if (!foundUser) {
