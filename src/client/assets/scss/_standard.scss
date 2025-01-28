@@ -44,7 +44,7 @@ img{max-width:100%; vertical-align:bottom}
 
 /* Tables */
 table{border-collapse: collapse; border-spacing: 0; margin: $table-margin; max-width: 100%; width: 100%;}
-th{background: $th-bg; color: $th-color; padding: $th-padding;}
+th{background: $th-bg; color: $th-color; font-size: $th-font-size; padding: $th-padding;}
 td{border: $td-border; padding: $td-padding; text-align: center;}
 
 /* Lists and Nav */
@@ -62,6 +62,7 @@ input, textarea{background: $input-bg; background-repeat: no-repeat; border: $in
 label{color: $label-color; font-size: $label-size; font-weight: bold; $margin-bottom: $label-mar-bot; text-align: left; width: 100%;}
 input::placeholder{color: #BBB; font-size: 0.875rem;}
 span.form-error{color: $error; display: block; font-size: 0.875rem; margin: -0.75rem 0 1rem;}
+button.delete{background: $button-delete-bg;}
 
 /* Scrollbar */
 ::-webkit-scrollbar{width: $scroll-width;}
@@ -170,7 +171,7 @@ span.form-error{color: $error; display: block; font-size: 0.875rem; margin: -0.7
 .no-bg{background: none !important;}
 
 /* Modals and Overlays */
-.overlay{align-items: center; background: $overlay-bg; display: none; flex-direction: column; height: 100%; justify-content: center; left: 0; position: fixed; text-align: center; top: 0; z-index: 9; width: 100%;}
+.overlay{align-items: center; background: $overlay-bg; flex-direction: column; height: 100%; justify-content: center; left: 0; position: fixed; text-align: center; top: 0; z-index: 9; width: 100%;}
 .overlay.open{display: flex; position: absolute;}
 .overlay.error{background: $overlay-error-bg;}
 .overlay > div{}

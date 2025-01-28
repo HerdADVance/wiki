@@ -2,10 +2,10 @@
 
 	// === IMPORTS ===
 	import { onMounted, reactive, ref } from 'vue'
+	import ApiMessage from '@/components/api/ApiMessage.vue'
 	
 	// === ITEM HANDLER (for Users) ===
 	import { useItemHandler } from '@/composables/useItemHandler.js'
-	//const { items, displayItems, filterItems, sortItems, deleteItem, toggleSortOrder } = useItemHandler([])
 	const {
 		items: users, 
 		displayItems: displayUsers,
@@ -18,7 +18,7 @@
 
 	// === API CALL (GET Users & Roles) ===
 	import { useApi } from '@/composables/useApi.js'
-	const { apiCall, apiLoading, apiData, apiError } = useApi()
+	const { apiCall, apiLoading, apiData, apiError, apiMessage, apiStatus } = useApi()
 	
 	const roles = ref([])
 	const getUsers = async (id) => {
@@ -32,12 +32,27 @@
 	}
 	getUsers()
 
+  // === DELETE MODAL ===
+  let showModal = ref(false)
+  let userIdToDelete = ref(null)
+
 
 	// === EVENTS ===
-	const handleUserDeleteClick = async (userId) => {
-		await apiCall('post', 'users/delete', { userId })
-		deleteUser(userId)
+  const confirmUserDeleteClick = async () => {
+    await apiCall('post', 'users/delete', { userId: 777 })
+    if(!apiError.value) deleteUser(userId)
+    showModal.value = false
+  }
+
+	const handleUserDeleteClick = (userId) => {
+    userIdToDelete.value = userId
+    showModal.value = true
 	}
+
+  const handleUserRoleChange = async (event, userId) => {
+    const roleId = +event.target.value
+    await apiCall('patch', 'users/' + userId, { roleId })
+  }
 
 	const handleUsersFilterByRole = (event) => {
 		const roleId = +event.target.value
@@ -54,10 +69,6 @@
 
 
 <template>
-
-	<div v-if="apiError" style="background: crimson;, color: white; height: 50px; padding: 1rem;">
-		{{ apiError.response.data.message }}
-	</div>
 	<h1>Users</h1>
 	
 	<select @change="handleUsersFilterByRole($event)">
@@ -65,26 +76,37 @@
 		<option v-for="role in roles" :key="role.id" :value="role.id">{{ role.title }}</option>
 	</select>
 
+  <ApiMessage v-if="apiMessage" :message="apiMessage" :status="apiStatus" />
+
 	<table>
 		<thead>
-			<tr>
+			<tr class="head-clickable">
 				<th @click="handleUsersSort('email')">Email</th>
 				<th @click="handleUsersSort('username')">Username</th>
 				<th @click="handleUsersSort('role_title')">Role</th>
-				<th>Edit</th>
-				<th>Delete</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr v-for="user in displayUsers">
 				<td>{{ user.email }}</td>
 				<td>{{ user.username }}</td>
-				<td>{{ user.role_title }}</td>
-				<td><button @click="editUserRole">Edit</button></td>
-				<td><button @click="handleUserDeleteClick(user.id)">Delete</button></td>
+				<td>
+          <select v-model="user.role_id" @change="handleUserRoleChange($event, user.id)">
+            <option v-for="role in roles" :key="role.id" :value="role.id">{{ role.title }}</option>
+          </select>
+        </td>
+				<td><button @click="handleUserDeleteClick(user.id)" class="delete">Delete</button></td>
 			</tr>
 		</tbody>
 	</table>
+
+  <div v-if="showModal" class="overlay">
+    <div class="modal">
+      <p style="color: white;">Are you sure you want to delete this user?</p>
+      <p><button @click="confirmUserDeleteClick()">Yes</button></p>
+    </div>
+  </div>
 
 </template>
 

@@ -6,6 +6,8 @@ $sec: #08C076;
 $ter: #222;
 $white: #f2f2e3;
 $error: crimson;
+$red: crimson;
+$red-dark: color.scale($red, $lightness: -10%);
 
 $pri-dark: color.scale($pri, $lightness: -20%);
 $sec-dark: color.scale($sec, $lightness: -20%);
@@ -69,11 +71,12 @@ $trans: background 0.25s ease;
 
 // Tables
 $table-margin: 1rem 0;
-$th-bg: blue;
+$th-bg: $pri-light;
 $th-color: white;
-$th-padding: 4px;
-$td-border: 1px solid #EEE;
-$td-padding: 5px;
+$th-font-size: 1.125rem;
+$th-padding: 0.75rem;
+$td-border: 1px solid $pri-lightest;
+$td-padding: 0.5rem 0.5rem;
 
 // Labels & Inputs
 $label-color: #333;
@@ -87,11 +90,12 @@ $input-padding: 0.75rem 0.625rem;
 // Buttons
 $button-bg: linear-gradient(to bottom right, $pri 0%, $pri-dark 100%);
 $button-color: white;
+$button-delete-bg: linear-gradient(to bottom right, $red 0%, $red-dark 100%);
 $button-hover-bg: linear-gradient(to bottom right, #ac2c2c 0%, #6b1039 100%);
-$button-mar-top: 1.5rem;
+$button-mar-top: 0;
 $button-padding: 4px 8px;
 $button-shadow: $shadow;
-$button-size: 1.25rem;
+$button-size: 1rem;
 $button-submit-mar-top: 2rem;
 $button-trans: background 0.25s ease;
 

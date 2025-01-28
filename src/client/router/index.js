@@ -1,7 +1,7 @@
 
 // === IMPORTS ===
 import { createRouter, createWebHistory } from 'vue-router';
-import DashboardView from '@/views/main/DashboardView.vue';
+
 
 // === IMPORTED ROUTES ===
 import adminRoutes from './adminRoutes';

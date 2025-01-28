@@ -4,8 +4,8 @@ class UserValidator {
     
   static login(){
     return [
-        body('username')
-          .isLength({ min: 5 }).withMessage('Username must be at least 5 characters long'),
+      body('username')
+        .isLength({ min: 5 }).withMessage('Username must be at least 5 characters long'),
     ];
   }
 

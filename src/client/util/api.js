@@ -11,5 +11,8 @@ export default {
 	},
 	post(url, data){
 		return api.post(url, data);
+	},
+	patch(url, data){
+		return api.patch(url, data);
 	}
 }
