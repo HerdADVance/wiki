@@ -9,6 +9,9 @@ $error: crimson;
 $red: crimson;
 $red-dark: color.scale($red, $lightness: -10%);
 
+$pri-darker: color.scale($pri, $lightness: -40%);
+$sec-darker: color.scale($sec, $lightness: -40%);
+$ter-darker: color.scale($ter, $lightness: -40%);
 $pri-dark: color.scale($pri, $lightness: -20%);
 $sec-dark: color.scale($sec, $lightness: -20%);
 $ter-dark: color.scale($ter, $lightness: -20%);

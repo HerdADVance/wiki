@@ -3,6 +3,7 @@
 	// === IMPORTS ===
 	import { onMounted, reactive, ref } from 'vue'
 	import ApiMessage from '@/components/api/ApiMessage.vue'
+  import Modal from '@/components/ui/Modal.vue'
 	
 	// === ITEM HANDLER (for Users) ===
 	import { useItemHandler } from '@/composables/useItemHandler.js'
@@ -12,7 +13,8 @@
 		filterItems: filterUsers, 
 		sortItems: sortUsers,
 		deleteItem: deleteUser,
-		toggleSortOrder
+		toggleSortOrder,
+    updateItemProperty: updateUserProperty
 	} = useItemHandler([])
 
 
@@ -32,26 +34,39 @@
 	}
 	getUsers()
 
-  // === DELETE MODAL ===
+  // === MODAL FOR DELETE USER CONFIRMATION ===
   let showModal = ref(false)
   let userIdToDelete = ref(null)
+  let usernameToDelete = ref(null)
+  let modalMessage = ref('')
 
 
 	// === EVENTS ===
-  const confirmUserDeleteClick = async () => {
-    await apiCall('post', 'users/delete', { userId: 777 })
-    if(!apiError.value) deleteUser(userId)
-    showModal.value = false
+  const handleGlobalClick = () => {
+    if(showModal.value) showModal.value = false
   }
 
-	const handleUserDeleteClick = (userId) => {
+	const handleUserDeleteClick = (userId, username) => {
     userIdToDelete.value = userId
+    usernameToDelete.value = username
+    modalMessage.value = `Are you sure you want to delete ${usernameToDelete.value}?`
     showModal.value = true
 	}
 
+  const handleUserDeleteConfirmation = async (result) => {
+    if(result){
+      await apiCall('post', 'users/delete', { userId: userIdToDelete.value })
+      if(!apiError.value) deleteUser(userIdToDelete.value)
+      showModal.value = false
+    }
+  }
+
   const handleUserRoleChange = async (event, userId) => {
     const roleId = +event.target.value
+    const roleTitle = event.target.options[event.target.selectedIndex].text
     await apiCall('patch', 'users/' + userId, { roleId })
+    updateUserProperty(userId, 'role_id', roleId)
+    updateUserProperty(userId, 'role_title', roleTitle)
   }
 
 	const handleUsersFilterByRole = (event) => {
@@ -69,6 +84,7 @@
 
 
 <template>
+  <GlobalEvents @click="handleGlobalClick" />
 	<h1>Users</h1>
 	
 	<select @change="handleUsersFilterByRole($event)">
@@ -96,17 +112,22 @@
             <option v-for="role in roles" :key="role.id" :value="role.id">{{ role.title }}</option>
           </select>
         </td>
-				<td><button @click="handleUserDeleteClick(user.id)" class="delete">Delete</button></td>
+				<td>
+          <button 
+            @click.stop="handleUserDeleteClick(user.id, user.username)" 
+            class="delete"
+          >Delete
+          </button>
+        </td>
 			</tr>
 		</tbody>
 	</table>
 
-  <div v-if="showModal" class="overlay">
-    <div class="modal">
-      <p style="color: white;">Are you sure you want to delete this user?</p>
-      <p><button @click="confirmUserDeleteClick()">Yes</button></p>
-    </div>
-  </div>
+  <Modal 
+    v-if="showModal"
+    @emitConfirmation="handleUserDeleteConfirmation"
+    :message="modalMessage"
+  />
 
 </template>
 

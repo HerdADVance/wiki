@@ -9,6 +9,6 @@ const UsersValidator = require('../validators/UsersValidator.js');
 // Routes
 router.get('/', isAdmin, getUsers);
 router.post('/delete', isAdmin, UsersValidator.delete(), deleteUser);
-router.patch('/:userId', isAdmin, patchUser);
+router.patch('/:userId', isAdmin, UsersValidator.patch(), patchUser);
 
 module.exports = router;

@@ -365,6 +365,13 @@ button.delete {
   background: linear-gradient(to bottom right, crimson 0%, #c61236 100%);
 }
 
+select {
+  color: rgb(6.4, 153.6, 94.4);
+  cursor: pointer;
+  font-size: 1.125rem;
+  padding: 0.125rem 0.5rem;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

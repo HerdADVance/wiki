@@ -15,10 +15,9 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (user, done) => {
   try{
-      const userQuery = await UserRepository.findById(user.id);
-      let foundUser = userQuery.foundUser;
-      if(!foundUser) throw new Error(userQuery.error);
-      done(null, foundUser)
+      const foundUser = await UserRepository.findById(user.id);
+      if(foundUser.error) throw new Error(userQuery.error);
+      done(null, foundUser.data)
   } catch(err){
       done(err, null);
   }

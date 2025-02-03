@@ -39,10 +39,8 @@ export function useApi() {
       apiStatus.value = err.status
       if( err.response?.data?.message ) {
         apiMessage.value = err.response.data.message
-        apiMessage.value = ''
       } else{
         apiMessage.value = err
-        apiMessage.value = ''
       }
 
     } finally {

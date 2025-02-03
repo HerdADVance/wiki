@@ -1,6 +1,7 @@
 
 const { validationResult } = require('express-validator');
 const formatErrors = require('../util/formatErrors.js');
+const handleValidation  = require('../util/handleValidation.js');
 const RolesRepository = require('../repositories/RolesRepository.js');
 const UserRepository = require('../repositories/UserRepository.js');
 
@@ -26,16 +27,25 @@ const deleteUser = async (req, res, next) => {
     await UserRepository.delete(req.body.userId);
     return res.status(200).json({ message: 'User successfully deleted' });
   } catch(error) {
+  	console.log(error)
     return res.status(400).json({ message: "There was a problem deleting the user" });
   }
 };
 
+// Requires isAdmin middleware
 const patchUser = async (req, res, next) => {
-	const foundUser = await UserRepository.findById(req.params.userId);
-	console.log(foundUser)
-	console.log('Old Role Id: ' + foundUser.foundUser.role_id)
-	console.log('New Role Id: ' + req.body.roleId)
-	return res.status(200).json({ message: 'User successfully updated' });
+
+	// Validate request
+	const error = handleValidation(validationResult(req))
+	if(error.message) return res.status(400).json({ message: error.message })
+
+	// Update user's role or return error
+	const updated = await UserRepository.updateRole(req.params.userId, req.body.roleId)
+	if(updated.error) return res.status(400).json({ message: updated.error })
+
+	// Return success message
+	const message = `User ${updated.user.username}'s role succesfully updated`
+	return res.status(200).json({ message });
 };
 
 

@@ -46,6 +46,13 @@ export function useItemHandler(initialItems = []) {
     sortOrder.value = sortOrder.value === 'asc' ? 'desc' : 'asc'
   }
 
+  function updateItemProperty(id, property, newValue){
+    const index = items.value.findIndex(item => item.id === id)
+    if(index !== -1) {
+      items.value[index][property] = newValue
+    }
+  }
+
   return {
     items,
     displayItems,
@@ -53,6 +60,7 @@ export function useItemHandler(initialItems = []) {
     deleteItem,
     filterItems,
     sortItems,
-    toggleSortOrder
+    toggleSortOrder,
+    updateItemProperty
   }
 }

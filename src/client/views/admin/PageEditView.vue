@@ -5,6 +5,7 @@
 	import { useRoute } from 'vue-router';
 	import { useApi } from '@/composables/useApi.js';
 	import { useSettingsStore } from '@/stores/settingsStore.js';
+  import { usePageStore } from '@/stores/pageStore.js';
 
 	// === COMPONENTS ===
 	import PageSections from '@/components/pages/PageSections.vue';
@@ -12,6 +13,7 @@
 
 	// === STORE ===
 	const store = useSettingsStore();
+  const pageStore = usePageStore();
 
 	// === COMPOSABLES ===
 	const { apiCall, apiLoading, apiData, apiError } = useApi();
@@ -47,6 +49,7 @@
 		try{
 			await apiCall('get', 'pages/' + id);
 			Object.assign(page, apiData.value.page);
+      console.log(apiData.value.page)
 		} catch(error){
 			//console.log(error)
 			//console.log(error.response.data.message);

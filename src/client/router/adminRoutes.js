@@ -30,7 +30,7 @@ const adminRoutes = [
 		meta: editorMeta
 	},
 	{
-		path: "/admin/page/edit/:id",
+		path: "/admin/page/:id",
 		name: "PageEdit", 
 		component: loadView('PageEditView'), 
 		meta: editorMeta

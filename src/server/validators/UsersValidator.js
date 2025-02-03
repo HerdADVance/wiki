@@ -9,6 +9,13 @@ class UsersValidator {
     ])
   }
 
+  static patch(){
+    return checkExact([
+      body('roleId')
+        .isInt({ no_symbols: true }).withMessage('Role id must be an integer')
+    ])
+  }
+
 }
 
 module.exports = UsersValidator;
