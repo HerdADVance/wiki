@@ -2,6 +2,7 @@
 const db = require('../config/database.js');
 const { validationResult } = require('express-validator');
 const PagesRepository = require('../repositories/PagesRepository.js');
+const PagesTopicsRepository = require('../repositories/PagesTopicsRepository.js');
 const formatErrors = require('../util/formatErrors.js');
 
 
@@ -14,32 +15,15 @@ const getPages = async (req, res, next) => {
 // === GET PAGE ===
 const getPage = async (req, res, next) => {
   const pageId = req.params.pageId;
-  console.log('getting page ' + pageId);
-  //console.log(req.session.passport.user);
-  try { 
-    const foundPage = await PagesRepository.findById(pageId);
-    if(!foundPage) return res.status(401).json({message: "Couldn't find that page in the database"});
-    return res.status(200).json({page: foundPage});
-  } catch(error) {
-    return res.status(401).json({message: "There was a problem accessing the database"});
-  }
-
-  // let page = await db('pages').where({ id: pageId }).first();
-  // const pageTopics = await db('topics')
-  //   .join('pages_topics', 'topics.id', 'pages_topics.topic_id')
-  //   .where('pages_topics.page_id', pageId)
-  //   .select('topics.*');
-  // page.topic = pageTopics[0]
-  //const topics = await db('topics');
-
-  //res.render('pages/page', { page: page, topics: topics, hasEditor: true});
+  const page = await PagesRepository.getPage(pageId);
   
+  if(page.error) return res.status(400).json({message: page.error});
+  return res.status(200).json({page: page.data});
 };
 
 
 // === CREATE PAGE ===
 const createPage = async (req, res, next) => {
-  
   // Validate new page, Return validaton error if fails
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -55,6 +39,16 @@ const createPage = async (req, res, next) => {
     return res.status(401).json({message: 'There was a problem adding the new page to the database'});
   }
 };
+
+// === ADD TOPIC TO PAGE ===
+const addPageTopic = async (req, res, next) => {
+  const result = await PagesTopicsRepository.associate(req.params.pageId, req.params.topicId);
+  if (result.error) return res.status(400).json({ message: result.error })
+  return res.status(200).json({message: 'Topic added to page'});
+};
+
+
+
 
 
 const updatePage = async (req, res, next) => {
@@ -108,6 +102,7 @@ module.exports = {
   getPage,
   createPage,
   updatePage,
-  deletePage
+  deletePage,
+  addPageTopic
 };
 

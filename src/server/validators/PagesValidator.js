@@ -9,6 +9,13 @@ class PagesValidator {
     ]);
   }
 
+  // static addTopic(){
+  //   return checkExact([
+  //     body('title')
+  //       .isLength({ min: 7 }).withMessage('Title must be at least 7 characters long'),
+  //   ]);
+  // }
+
 }
 
 module.exports = PagesValidator;

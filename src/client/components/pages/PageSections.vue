@@ -1,18 +1,16 @@
 <script setup>
 
 	// === IMPORTS ===
-	import { defineModel, onMounted, ref } from 'vue';
+	import { computed, defineModel, onMounted, ref } from 'vue';
 	import draggable from 'vue3-draggable-next';
+  import { usePageStore } from '@/stores/pageStore.js';
 	
-
 	// === COMPONENTS ===
 	import PageSection from '@/components/pages/PageSection.vue';
 
-	// === PROPS AS MODEL ===
-	const sections = defineModel();
-
-	// === COMPOSABLES & EMITS ===
-
+	// === STORE ====
+  const pageStore = usePageStore()
+	const sections = computed(()=> pageStore.page.sections)
 
 	// === REF ===
 	let newSectionId = ref(1);

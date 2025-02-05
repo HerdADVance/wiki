@@ -1,21 +1,23 @@
 <script setup>
 	
 	// === IMPORTS ===
-	import { ref } from 'vue';
+	import { computed, ref } from 'vue';
 	import { useSettingsStore } from '@/stores/settingsStore.js';
+  import { usePageStore } from '@/stores/pageStore.js';
 
 	// === COMPONENTS ===
 	import LiveSearchInput from '@/components/forms/LiveSearchInput.vue';
 
 	// === STORE ===
 	const store = useSettingsStore();
-
-	// === PROPS AS MODEL ===
-	const topics = defineModel();
+  const pageStore = usePageStore();
+  const topics = computed(()=> pageStore.page.topics)
 
 	// === METHODS ===
-	const handleResultClick = (topic) => {
-	  topics.value.push(topic);
+	const handleTopicAddClick = async (topic) => {
+    await pageStore.addPageTopic(topic)
+   //  pageStore.addTopic(topic.id)
+	  // topics.value.push(topic);
 	};
 
 	const handleTopicClick = (index) => {
@@ -48,7 +50,7 @@
 		table="topics"
 		placeholder="Type to add new topics"
 		:limit=5
-		@emitClickedResult="handleResultClick"
+		@emitClickedResult="handleTopicAddClick"
 	/>
 
 </template>
