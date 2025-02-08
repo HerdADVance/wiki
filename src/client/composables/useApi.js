@@ -26,8 +26,11 @@ export function useApi() {
         response = await api.post(reqUrl, reqData)
       } else if(reqType === 'patch') {
         response = await api.patch(reqUrl, reqData)
+      } else if(reqType === 'delete') {
+        response = await api.delete(reqUrl, reqData)
       }
 
+      console.log(response.data)
       apiData.value = response.data
       apiStatus.value = response.status
       if (response.data?.message) apiMessage.value = response.data.message

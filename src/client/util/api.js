@@ -14,5 +14,8 @@ export default {
 	},
 	patch(url, data){
 		return api.patch(url, data);
+	},
+	delete(url, data){
+		return api.delete(url, data);
 	}
 }

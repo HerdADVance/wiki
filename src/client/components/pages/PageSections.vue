@@ -12,12 +12,9 @@
   const pageStore = usePageStore()
 	const sections = computed(()=> pageStore.page.sections)
 
-	// === REF ===
-	let newSectionId = ref(1);
 
 	// === METHODS ===
 	const handleAddSection = () => {
-		newSectionId.value += 1;
 		sections.value.push({
 			id: newSectionId.value,
 			content: 'Section content #' + newSectionId.value
@@ -31,11 +28,7 @@
 		//console.log(section);
 		//if (section) section.content = content
 	}
-
-	onMounted(async () => {
-		//console.log(sections.value);
-	});
-
+  
 </script>
 
 

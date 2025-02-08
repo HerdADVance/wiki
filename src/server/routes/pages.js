@@ -8,7 +8,8 @@ const {
 	createPage,
 	updatePage,
 	deletePage,
-	addPageTopic
+	addPageTopic,
+	removePageTopic
 } = require('../controllers/pagesController.js');
 
 // Validators
@@ -22,6 +23,7 @@ router.post('/create', PagesValidator.create(), createPage);
 //router.post('/update/:pageId', updatePage);
 //router.post('/delete/:pageId', deletePage);
 router.post('/:pageId/topics/:topicId', isAdmin, addPageTopic);
+router.delete('/:pageId/topics/:topicId', isAdmin, removePageTopic);
 
 
 module.exports = router;

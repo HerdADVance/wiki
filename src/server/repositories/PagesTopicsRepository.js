@@ -21,6 +21,24 @@ class PagesTopicsRepository {
 		}
 	}
 
+	static async disassociate(pageId, topicId){
+		try{
+			// Return error if association doesn't exist
+			const existingRow = await db('pages_topics').where({ page_id: pageId, topic_id: topicId }).first();
+			if(!existingRow) return { error: "That topic wasn't associated with this page" };
+
+			// Remove row from table & return success message
+			await db('pages_topics')
+				.where({ page_id: pageId, topic_id: topicId }).del();
+
+			return { message: "Topic successfully removed from page" }
+
+		} catch(error){
+			console.error(error);
+			return { error: "There was a problem removing that topic from the page" };
+		}
+	}
+
 }
 
 module.exports = PagesTopicsRepository;

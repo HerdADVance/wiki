@@ -17,8 +17,8 @@ const getPage = async (req, res, next) => {
   const pageId = req.params.pageId;
   const page = await PagesRepository.getPage(pageId);
   
-  if(page.error) return res.status(400).json({message: page.error});
-  return res.status(200).json({page: page.data});
+  if(page.error) return res.status(400).json({ message: page.error });
+  return res.status(200).json({ page: page.data });
 };
 
 
@@ -33,10 +33,10 @@ const createPage = async (req, res, next) => {
   // Add new page to DB, Return success & new page or error page
   try {
     const newPage = await PagesRepository.create(req.body);
-    return res.status(200).json({message: 'New Page created', newPageId: newPage.id});
+    return res.status(200).json({ message: 'New Page created', newPageId: newPage.id });
   } catch (error) {
     console.log(error);
-    return res.status(401).json({message: 'There was a problem adding the new page to the database'});
+    return res.status(401).json({ message: 'There was a problem adding the new page to the database' });
   }
 };
 
@@ -44,7 +44,14 @@ const createPage = async (req, res, next) => {
 const addPageTopic = async (req, res, next) => {
   const result = await PagesTopicsRepository.associate(req.params.pageId, req.params.topicId);
   if (result.error) return res.status(400).json({ message: result.error })
-  return res.status(200).json({message: 'Topic added to page'});
+  return res.status(200).json({ message: result.message });
+};
+
+// === REMOVE TOPIC FROM PAGE ===
+const removePageTopic = async (req, res, next) => {
+  const result = await PagesTopicsRepository.disassociate(req.params.pageId, req.params.topicId);
+  if (result.error) return res.status(400).json({ message: result.error })
+  return res.status(200).json({ message: result.message });
 };
 
 
@@ -103,6 +110,7 @@ module.exports = {
   createPage,
   updatePage,
   deletePage,
-  addPageTopic
+  addPageTopic,
+  removePageTopic
 };
 

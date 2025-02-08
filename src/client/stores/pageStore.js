@@ -2,10 +2,11 @@
 import { defineStore } from 'pinia'
 import { reactive, ref } from 'vue'
 import { useApi } from '@/composables/useApi.js'
-const { apiCall, apiLoading, apiData, apiError } = useApi()
+const { apiCall, apiData, apiError, apiLoading, apiMessage, apiStatus } = useApi()
 
 export const usePageStore = defineStore('page', () => {
 	
+	// === STATE ===
 	const page = ref({
 		id: null,
 		title: '',
@@ -13,24 +14,63 @@ export const usePageStore = defineStore('page', () => {
 		sections: []
 	})
 
-	const addPageTopic = async(topic) => {
-		await apiCall('post', `pages/${page.value.id}/topics/${topic.id}`)
-		console.log(page.value)
-		console.log(topic)
+	const messages = ref({
+		page: null,
+		topics: null
+	})
+
+	
+	// === SETTERS ===
+	const addTopic = (topic) => {
 		page.value.topics.push(topic)
-		return 'done'
 	}
 
-	const getPageData = async (pageId) => {
-		await apiCall('get', 'pages/' + pageId)
-		return apiData.value.page
+	const clearMessages = () => {
+		const newEmptyObj = Object.fromEntries(
+      Object.keys(messages.value).map(key => [key, ''])
+    )
+    messages.value = newEmptyObj
+	}
+
+	const removeTopic = (index) => {
+		page.value.topics.splice(index, 1)
+	}
+
+	const setMessage = (messageType) => {
+		clearMessages()
+		messages.value[messageType] = {
+			message: apiMessage.value,
+			status: apiStatus.value
+		}
 	}
 
 	const setPage = (pageData) => {
 		page.value = pageData
 	}
 
-	return { page, addPageTopic, getPageData, setPage }
+
+	// === API CALLS ===
+	const addPageTopic = async(topic) => {
+		await apiCall('post', `pages/${page.value.id}/topics/${topic.id}`)
+		apiError.value ? setMessage('topics') : addTopic(topic)
+	}
+
+	const getPageData = async (pageId) => {
+		await apiCall('get', 	`pages/${pageId}`)
+		apiError.value ? setMessage('page') : setPage(apiData.value.page)
+	}
+
+	const removePageTopic = async(index, topic) => {
+		clearMessages()
+		await apiCall('delete', `pages/${page.value.id}/topics/${topic.id}`)
+		apiError.value ? setMessage('topics') : removeTopic(index)
+	}
+
+	
+
+
+	// === RETURN AVAILABLE METHODS ===
+	return { page, messages, addPageTopic, getPageData, removePageTopic }
 
 });
 
