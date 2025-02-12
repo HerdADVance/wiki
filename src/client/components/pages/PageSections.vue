@@ -15,10 +15,7 @@
 
 	// === METHODS ===
 	const handleAddSection = () => {
-		sections.value.push({
-			id: newSectionId.value,
-			content: 'Section content #' + newSectionId.value
-		});
+    pageStore.addSection()
 	}
 
 	const onSectionDrag = (id, content) => {
@@ -28,7 +25,7 @@
 		//console.log(section);
 		//if (section) section.content = content
 	}
-  
+
 </script>
 
 
